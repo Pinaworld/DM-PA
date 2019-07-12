@@ -14,8 +14,9 @@
     <string name="City">Ville</string>
 
     <string name="FindAnnounces">Trouver des annonces</string>
-    <string name="FindDemenagement">Trouver des aides aux demenagement</string>
+    <string name="FindDemenagement">Trouver des aides aux déménagements</string>
     <string name="CreateDemenagement">Créer un déménagement</string>
+    <string name="ListDemenagement">Listes des déménagements</string>
 
     <string name="RemeberMe">Se souvenir de moi</string>
     <string name="Return">Retour</string>

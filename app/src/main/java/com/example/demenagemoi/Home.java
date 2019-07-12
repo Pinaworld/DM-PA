@@ -1,5 +1,6 @@
 package com.example.demenagemoi;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,4 +23,10 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(this, EditAccount.class);
         startActivity(intent);
     }
+
+    public void DemenagementListActivity(View view){
+        Intent intent = new Intent(this, DemenagementList.class);
+        startActivity(intent);
+    }
+
 }

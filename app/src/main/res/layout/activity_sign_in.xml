@@ -65,11 +65,13 @@
 
     <Button
         android:id="@+id/buttonConnexion"
+        style="@android:style/Widget.DeviceDefault.Light.Button.Toggle"
         android:layout_width="123dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:onClick="HomeActivity"
         android:text="Connexion"
         app:layout_constraintBottom_toTopOf="@+id/ButtSignIn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,6 +79,7 @@
 
     <Button
         android:id="@+id/ButtSignIn"
+        style="@android:style/Widget.DeviceDefault.Light.Button.Toggle"
         android:layout_width="123dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"

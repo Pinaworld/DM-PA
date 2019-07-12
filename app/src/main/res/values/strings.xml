@@ -5,9 +5,18 @@
     <string name="ConfirmSignUp">Confirmer inscription</string>
 
 
-
     <string name="EmailUSer">Email utilisateur</string>
     <string name="PasswordUser">Mot de passe</string>
+    <string name="AccountEdit">Modification du compte</string>
+    <string name="Name">Nom</string>
+    <string name="FirstName">Prénom</string>
+    <string name="ZipCode">Code Postal</string>
+    <string name="City">Ville</string>
+
+    <string name="FindAnnounces">Trouver des annonces</string>
+    <string name="FindDemenagement">Trouver des aides aux demenagement</string>
+    <string name="CreateDemenagement">Créer un déménagement</string>
 
     <string name="RemeberMe">Se souvenir de moi</string>
+    <string name="Return">Retour</string>
 </resources>

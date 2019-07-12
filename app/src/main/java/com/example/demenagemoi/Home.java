@@ -5,19 +5,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class SignIn extends AppCompatActivity {
+public class Home extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_home);
     }
-    public void SignUpActivity(View view){
-        Intent intent = new Intent(this, SignUp.class);
+
+    public void DeconnectionActivity(View view){
+        Intent intent = new Intent(this, SignIn.class);
         startActivity(intent);
     }
-    public void HomeActivity(View view){
-        Intent intent = new Intent(this, Home.class);
+
+    public void EditAccountActivity(View view){
+        Intent intent = new Intent(this, EditAccount.class);
         startActivity(intent);
     }
 }

@@ -29,4 +29,13 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void DemenagementCreateActivity(View view){
+        Intent intent = new Intent(this, DemenagementCreate.class);
+        startActivity(intent);
+    }
+
+    public void MapCarboardActivty(View view){
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
 }

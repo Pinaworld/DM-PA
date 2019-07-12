@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DemenagementList"></activity>
+        <activity android:name=".DemenagementCreate"></activity>
+        <activity android:name=".DemenagementList" />
         <activity android:name=".Home" />
         <activity android:name=".EditAccount" />
         <activity android:name=".SignUp" />
@@ -36,7 +37,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyD12kMG4VHpUJrlg40aOuHwKd3h8-P69FM" />
 
         <activity
             android:name=".MapsActivity"

@@ -8,7 +8,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
+    <title>Enregistrement Anonnce</title>
 
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -36,7 +36,7 @@
                                 <div class="input-group">
                                     <label class="label">Choisissez une date</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4" type="date" name="date">
+                                        <input class="input--style-4" id="datefield" type="date" name="date" min="">
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +73,23 @@
             </div>
         </div>
     </div>
+<script type="text/javascript">
 
+    // date du jour minimum pour le datepicker
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+    var yyyy = today.getFullYear();
+     if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+    document.getElementById("datefield").setAttribute("min", today);
+</script>
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->

@@ -76,9 +76,6 @@
 
   <script type="text/javascript">
     $('#connexxxxxion').on('click', function(){
-      document.location.href="HomePage.html";
-    });
-  function goHomePage() {
      document.location.href="HomePage.html" //pour test
        var email = document.getElementById("mail").value;
        var mdp = document.getElementById("mdp").value;
@@ -86,7 +83,7 @@
     if(validate(email) != false && mdp.length != 0 ){
         $.ajax({
           type: 'POST',
-          url: "http:// route de l'api pour auth",
+          url: "calhost:8081/user/",
           data: {
             email: email,
             password: mdp
@@ -101,7 +98,7 @@
         });
         
       }
-  };
+  });
   </script>
   <script type="text/javascript"></script>
 <!--===============================================================================================-->

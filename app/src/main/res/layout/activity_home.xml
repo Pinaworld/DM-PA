@@ -26,14 +26,14 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/BonjourM"
+        android:id="@+id/Bonjour "
         android:layout_width="wrap_content"
         android:layout_height="67dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="casual"
-        android:text="Bonjour M"
+        android:text="Bonjour "
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
         android:fontFamily="casual"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/BonjourM"
+        app:layout_constraintStart_toEndOf="@+id/Bonjour "
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.122" />
 

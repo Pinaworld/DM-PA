@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignIn">
+    tools:context=".SignIn"
+    android:background="@color/backgroungColor">
 
     <TextView
         android:id="@+id/textView"
@@ -73,6 +74,9 @@
         android:layout_marginBottom="8dp"
         android:onClick="HomeActivity"
         android:text="Connexion"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:background="@color/buttonSalmon"
+        android:textColor="@color/buttonText"
         app:layout_constraintBottom_toTopOf="@+id/ButtSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -87,6 +91,9 @@
         android:layout_marginBottom="84dp"
         android:onClick="SignUpActivity"
         android:text="S'inscrire"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:background="@color/buttonSalmon"
+        android:textColor="@color/buttonText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

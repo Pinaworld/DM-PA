@@ -7,9 +7,6 @@
     <meta name="author" content="Colorlib">
     <meta name="keywords" content="Colorlib Templates">
 
-    <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
-
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -29,19 +26,19 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <h2 class="title"> Enregistrez votre entreprise !</h2>
+                    <h2 class="title"> Modifiez votre entreprise !</h2>
                     <form class="login100-form validate-form">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Nom de l'entreprise</label>
-                                    <input class="input--style-4" type="text" name="name">
+                                    <input class="input--style-4" type="text" name="name" id="nameEntreprise">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Siren</label>
-                                    <input class="input--style-4" type="Number" name="siren">
+                                    <input class="input--style-4" type="Number" name="siren" id="sirenEntreprise">
                                 </div>
                             </div>
                         </div>
@@ -49,13 +46,21 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Ville</label>
-                                    <input class="input--style-4" type="text" name="ville">
+                                    <input class="input--style-4" type="text" name="ville" id="city">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Numéro de rue</label>
+                                    <input class="input--style-4" type="Number" name="ville" id="numaddress">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Adresse</label>
-                                    <input class="input--style-4" type="text" name="location">
+                                    <input class="input--style-4" type="text" name="location" id="address">
                                 </div>
                             </div>
                         </div>
@@ -63,75 +68,117 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Code postal</label>
-                                    <input class="input--style-4" type="text" name="zipcode">
+                                    <input class="input--style-4" type="number" max="95880" name="zipcode" id="zipCode">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="email">
+                                    <input class="input--style-4" type="email" name="email" id="mail">
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group validate-input">
+
                                   <label class="label">Mot de passe</label>
-                                    <input class="input--style-4  input100" type="password" name="pass" id="mdp">
+                                 
+                                    <input class="input--style-4  input100" type="password" name="mot de passe" id="mdp">
                                     <span class="focus-input100" data-placeholder="Mot de passe"></span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group validate-input">
                                   <label class="label">Confirmez votre mot de passe</label>
-                                    <input class="input--style-4  input100" type="password" name="pass" id="mdp">
+                                    <input class="input--style-4  input100" type="password" name="pass" id="mdp2">
                                     <span class="focus-input100" data-placeholder="Mot de passe"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" >Enregistrer</button>
+                            <button class="btn btn--radius-2 btn--blue" onclick="ModificationAdvertisement()">Enregistrer</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
+    var url = window.location.href;
+    var split = url.split("?");
+    var idCompany = split[1];
+    window.history.pushState("object or string", "Title", "ModificationEntreprise.html");
+    $.ajax({
+          type: "GET",
+          url: "localhost:8081/company/" + idCompany ,
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+        success: function( result){
+                document.getElementById("nameEntreprise").value = result.name;
+                document.getElementById("sirenEntreprise").value = result.SIREN;
+                document.getElementById("city").value = result.city;
+                document.getElementById("numaddress").value = result.number;
+                document.getElementById("address").value = result.street;
+                document.getElementById("zipCode").value = result.zipCode;
+                document.getElementById("mail").value = result.email;
+                document.getElementById("mdp").value = result.password;
+                document.getElementById("mdp2").value = result.password;
+            },
+            error: function (errormessage) {
+            alert("problème sur le get");
+        }
+    });
 
-      var url = window.location.href;
-      var id = url.split("?");
-        $.ajax({
-              type: "GET",
-              url: "http://localhost:8081/company/" + id[1],
-              contentType: "application/json; charset=utf-8",
-              dataType: "json",
-            success: function( result){
-                $(result).each(function (index, m){
-                      var ligne = $("<div class=\"col-md-4 col-sm-4 col-xs-12\">");
-                      ligne.append($("<div class=\"about-move\">"));
-                      ligne.append($("<div class= \"services-details\">"));
-                      ligne.append($("<div class=\"single-services\">"));
-                      ligne.append($("<h4>"+m.name"</h4>"));
-                      ligne.append($("<p>" + m.number +" "+ m.stret + " "+m.city + " " + m.zipcode+ "</p>"));
-                      ligne.append($("<p>" + m.id + "</p>"));
+function ModificationAdvertisement(){
 
-                      ligne.append($("<td>" + m.id + "</td>"));
-                        ligne.append($("<td>" + m.name + "</td>"));
-                        ligne.append($("<td>" + m.date + "</td>"));
-                        ligne.append($("<td>" + m.time + "</td>"));
-                        ligne.append($("<td>" + m.description + "</td>"));
-                        ligne.append($("<td> <input id=\"btntask\"  type=\"button\" value=\"details\" onClick=\"Details("+m.id+")\"> </td>"));
-                        ligne.append($("<td> <input id=\"btntask\"  type=\"button\" value=\"supprimer\" onClick=\"Delete("+m.id+")\"> </td>"));
-                        $('#displayconf').append(ligne);
-                    });
-                },
-                error: function (errormessage) {
-                alert(errormessage.responseText);
+    var nomEntreprise = document.getElementById("nameEntreprise").value;
+     var sirenEntreprise =document.getElementById("sirenEntreprise").value;
+     var city = document.getElementById("city").value;
+     var numaddress =document.getElementById("numaddress").value;
+     var address =document.getElementById("address").value ;
+     var zipCode =document.getElementById("zipCode").value;
+     var mail =document.getElementById("mail").value;
+     var mdp =document.getElementById("mdp").value;
+     var mdp2 =document.getElementById("mdp2").value;
+
+    if(mdp == mdp2){
+        if(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{12,})$/.test(mdp) == true){
+            if(nomEntreprise.lenght != 0 && sirenEntreprise.lenght != 0 && city.lenght != 0 && numaddress.lenght != 0 && address.lenght != 0 && zipCode.lenght != 0 && mail.lenght != 0){
+                $.ajax({
+                      type: "PUT",
+                      url: "localhost:8081/company/" + idCompany,
+                      contentType: "application/json; charset=utf-8",
+                      dataType: "json",
+                      data: {
+                        name: nomEntreprise,
+                        SIREN: sirenEntreprise,
+                        city: city,
+                        number: numaddress,
+                        street: address,
+                        zipCode: zipCode,
+                        email: mail,
+                        password: mdp
+                      },
+                    success: function( result){
+                        document.location.href="HomePage.html?"+idCompany;s
+                    },
+                    error: function (errormessage) {
+                        alert("il y a eu une erreur lors de la modification de l'entreprise");
+                    }
+                });
+            }else{
+                alert("Tout doit être renseigné !");
             }
-        });
+        }else{
+            alert("les mots de passes ne remplissent pas les conditions de sécurités : il faut au moins 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère spécial et une taille au dessus de 12");
+        }
+    }else{
+        alert("mots de passe différents ");
+    }
+}
 </script>
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>

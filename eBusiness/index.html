@@ -5,7 +5,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -53,9 +52,7 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" class="connexion" id="connexxxxxion">
-								Connexion
-							</button>
+							<input type="button" class=" login100-form-btn" name="connexion" id="connexxxxxion">
 						</div>
 					</div>
 
@@ -75,32 +72,36 @@
 	
 
   <script type="text/javascript">
-    $('#connexxxxxion').on('click', function(){
-     document.location.href="HomePage.html" //pour test
-       var email = document.getElementById("mail").value;
-       var mdp = document.getElementById("mdp").value;
-       
-    if(validate(email) != false && mdp.length != 0 ){
-        $.ajax({
-          type: 'POST',
-          url: "calhost:8081/user/",
-          data: {
-            email: email,
-            password: mdp
-          },
-          success: function(data) {
-            sessionStorage.setItem('tokken', 'LE TOKEN RETORUN2 PAR L API');
-            document.location.href="localhost:8080/HomePage.html"
-          },
-          error: function(errormessage){
-            alert(errormessage.responseText);
-          }
-        });
-        
-      }
-  });
+  	$.(document).(ready(function(){}));
+  	$.(document).ready(function(){
+
+  		$('#submit').on('click', function(){
+  		$('#connexxxxxion').click(function(){
+	       var email = document.getElementById("mail").value;
+	       var mdp = document.getElementById("mdp").value;
+	       
+		    if(validate(email) != false && mdp.length != 0 ){
+		        $.ajax({
+		          type: 'POST',
+		          url: "localhost:8081/user/login",
+		          data: {
+		            email: email,
+		            password: mdp
+		          },
+		          success: function(data) {
+		            sessionStorage.setItem('tokken', 'LE TOKEN RETORUN2 PAR L API');
+		            document.location.href="HomePage.html"
+		          },
+		          error: function(errormessage){
+		            alert(errormessage.responseText);
+		          }
+		        });
+		    }
+  		});
+	});
+    
   </script>
-  <script type="text/javascript"></script>
+
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -115,8 +116,8 @@
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+<!--==========================================================================
+	<script src="js/main.js"></script>=====================-->
 
 </body>
 </html>

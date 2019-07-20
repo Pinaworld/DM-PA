@@ -127,10 +127,12 @@
                 $(result).each(function (index, m){
                       var ligne = $("<div class=\"col-md-4 col-sm-4 col-xs-12\">");
                       ligne.append($("<div class=\"about-move\">"));
-                      ligne.append($("<td>" + m.id + "</td>"));
-                      ligne.append($("<td>" + m.id + "</td>"));
+                      ligne.append($("<div class= \"services-details\">"));
+                      ligne.append($("<div class=\"single-services\">"));
+                      ligne.append($("<h4>"+m.name"</h4>"));
+                      ligne.append($("<p>" + m.number +" "+ m.stret + " "+m.city + " " + m.zipcode+ "</p>"));
+                      ligne.append($("<p>" + m.id + "</p>"));
 
-                      
                       ligne.append($("<td>" + m.id + "</td>"));
                         ligne.append($("<td>" + m.name + "</td>"));
                         ligne.append($("<td>" + m.date + "</td>"));

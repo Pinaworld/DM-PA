@@ -198,6 +198,13 @@
               <!-- end about-details -->
             </div>
           </div>
+
+
+<a class="services-icon" href="#">
+                      <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  </a>
+
+
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="about-move">
               <div class="services-details">
@@ -214,14 +221,18 @@
               <!-- end about-details -->
             </div>
           </div>
+
+          <div id="displayAdvertisement">
+            
+          </div>
           <div class="col-md-4 col-sm-4 col-xs-12">
             <!-- end col-md-4 -->
             <div class=" about-move">
               <div class="services-details">
                 <div class="single-services">
                   <a class="services-icon" href="#">
-											<i class="fa fa-wordpress"></i>
-										</a>
+											<i class="fa fa-map-marker" aria-hidden="true"></i>
+									</a>
                   <h4>Wordpress Developer</h4>
                   <p>
                     will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
@@ -360,6 +371,43 @@
   </div>
   <!-- End Contact Area -->
 
+<script type="text/javascript">
+
+      var url = window.location.href;
+      var split = url.split("?");
+      var idcompany = split[1];
+      window.location.replace("HomePage.html");
+        $.ajax({
+              type: "GET",
+              url: "http://localhost:8081/advertisement/" + idcompany,
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+            success: function( result){
+                $(result).each(function (index, m){
+                      var ligne = $("<div class=\"col-md-4 col-sm-4 col-xs-12\">");
+                      ligne.append($("<div class=\"about-move\">"));
+                      ligne.append($("<div class= \"services-details\">"));
+                      ligne.append($("<div class=\"single-services\">"));
+                      ligne.append($("<a class=\"services-icon\" href=\"#\"> <i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i> </a>"));
+                      ligne.append($("<h4>"+m.availabilityDate"</h4>"));
+                      ligne.append($("<p>" + m.large +"</p>"));
+                      ligne.append($("<p>" + m.medium +"</p>"));
+                      ligne.append($("<p>" + m.small +"</p>"));
+                      ligne.append($("</div>"));
+                      ligne.append($("</div>"));
+                      ligne.append($("</div>"));
+                      ligne.append($("</div>"));
+
+                        ligne.append($("<td> <input id=\"btntask\"  type=\"button\" value=\"details\" onClick=\"Details("+m.id+")\"> </td>"));
+                        ligne.append($("<td> <input id=\"btntask\"  type=\"button\" value=\"supprimer\" onClick=\"Delete("+m.id+")\"> </td>"));
+                        $('#displayAdvertisement').append(ligne);
+                    });
+                },
+                error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+</script>
   <!-- JavaScript Libraries -->
   <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>

@@ -198,7 +198,7 @@
               <!-- end about-details -->
             </div>
           </div>
-          
+
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="about-move">
               <div class="services-details">
@@ -354,7 +354,7 @@
             <div class="contact-icon text-center">
               <div class="single-icon">
                 <div class="p-t-15">
-                    <button class="btn btn--radius-2 btn--blue">Modifier</button>
+                    <button class="btn btn--radius-2 btn--blue" onclick="ModificationEntreprise()">Modifier</button>
                 </div>
               </div>
             </div>
@@ -373,7 +373,7 @@
       window.location.replace("HomePage.html");
         $.ajax({
               type: "GET",
-              url: "http://localhost:8081/advertisement/" + idcompany,
+              url: "localhost:8081/advertisement/" + idcompany,
               contentType: "application/json; charset=utf-8",
               dataType: "json",
             success: function( result){
@@ -392,8 +392,7 @@
                       ligne.append($("</div>"));
                       ligne.append($("</div>"));
 
-                        ligne.append($("<td> <input id=\"btntask\"  type=\"button\" value=\"details\" onClick=\"Details("+m.id+")\"> </td>"));
-                        ligne.append($("<td> <input id=\"btntask\"  type=\"button\" value=\"supprimer\" onClick=\"Delete("+m.id+")\"> </td>"));
+                        ligne.append($("<td> <input id=\"btnModifier\"  type=\"button\" value=\"Modifier\" onClick=\"Modifier("+m.idAdvertisement+")\"> </td>"));
                         $('#displayAdvertisement').append(ligne);
                     });
                 },
@@ -401,6 +400,14 @@
                 alert(errormessage.responseText);
             }
         });
+
+
+        function Modifier(idAvertisement){
+          document.location.href="ModificationAnnonce.html?"+idcompany+idAvertisement;
+        };
+         function ModificationEntreprise(idcompany){
+          document.location.href="ModificationAnnonce.html?"+idcompany;
+        };
 </script>
   <!-- JavaScript Libraries -->
   <script src="lib/jquery/jquery.min.js"></script>

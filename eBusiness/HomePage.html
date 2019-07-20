@@ -7,10 +7,6 @@
   <meta content="" name="keywords">
   <meta content="" name="description">
 
-  <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
 
@@ -45,7 +41,7 @@
 
 <body data-spy="scroll" data-target="#navbar-example">
 
-  <div id="preloader"></div>
+<div id="preloader"></div>
 
   <header>
     <!-- header-area start -->
@@ -364,52 +360,67 @@
     </div>
   </div>
   <!-- End Contact Area -->
-
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
       var url = window.location.href;
       var split = url.split("?");
       var idcompany = split[1];
-      window.location.replace("HomePage.html");
-        $.ajax({
-              type: "GET",
-              url: "localhost:8081/advertisement/" + idcompany,
-              contentType: "application/json; charset=utf-8",
-              dataType: "json",
+      window.history.pushState("object or string", "Title", "HomePage.html");
+      //window.location.replace("HomePage.html");
+      $.ajax({
+            type: "GET",
+            url: "localhost:8081/advertisement/" + idcompany,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
             success: function( result){
-                $(result).each(function (index, m){
-                      var ligne = $("<div class=\"col-md-4 col-sm-4 col-xs-12\">");
-                      ligne.append($("<div class=\"about-move\">"));
-                      ligne.append($("<div class= \"services-details\">"));
-                      ligne.append($("<div class=\"single-services\">"));
-                      ligne.append($("<a class=\"services-icon\" href=\"#\"> <i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i> </a>"));
-                      ligne.append($("<h4>"+m.availabilityDate"</h4>"));
-                      ligne.append($("<p>" + m.large +"</p>"));
-                      ligne.append($("<p>" + m.medium +"</p>"));
-                      ligne.append($("<p>" + m.small +"</p>"));
-                      ligne.append($("</div>"));
-                      ligne.append($("</div>"));
-                      ligne.append($("</div>"));
-                      ligne.append($("</div>"));
+              $(result).each(function (index, m){
+                    var ligne = $("<div class=\"col-md-4 col-sm-4 col-xs-12\">");
+                    ligne.append($("<div class=\"about-move\">"));
+                    ligne.append($("<div class= \"services-details\">"));
+                    ligne.append($("<div class=\"single-services\">"));
+                    ligne.append($("<a class=\"services-icon\" href=\"#\"> <i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i> </a>"));
+                    ligne.append($("<h4>"+m.availabilityDate+"</h4>"));
+                    ligne.append($("<p>" + m.large +"</p>"));
+                    ligne.append($("<p>" + m.medium +"</p>"));
+                    ligne.append($("<p>" + m.small +"</p>"));
+                    ligne.append($("</div>"));
+                    ligne.append($("</div>"));
+                    ligne.append($("</div>"));
+                    ligne.append($("</div>"));
 
-                        ligne.append($("<td> <input id=\"btnModifier\"  type=\"button\" value=\"Modifier\" onClick=\"Modifier("+m.idAdvertisement+")\"> </td>"));
-                        $('#displayAdvertisement').append(ligne);
-                    });
-                },
-                error: function (errormessage) {
-                alert(errormessage.responseText);
+                      ligne.append($("<td> <input id=\"btnModifier\"  type=\"button\" value=\"Modifier\" onClick=\"ModifierAdvertisement("+m.idAdvertisement+")\"> </td>"));
+                      $('#displayAdvertisement').append(ligne);
+                  });
+            },
+              error: function (errormessage) {
+              alert(errormessage.responseText);
             }
         });
 
-
-        function Modifier(idAvertisement){
-          document.location.href="ModificationAnnonce.html?"+idcompany+idAvertisement;
+        function ModifierAdvertisement(idAvertisement){
+         $.ajax({
+          type: "PUT",
+          url: "localhost:8081/advertisement/" + idcompany + idAvertisement ,
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+        success: function( result){
+                document.getElementById("datefield").value = result.availabilityDate;
+                document.getElementById("cartonL").value = result.large;
+                document.getElementById("cartonM").value = result.medium;
+                document.getElementById("cartonS").value = result.small;
+            },
+            error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
         };
          function ModificationEntreprise(idcompany){
-          document.location.href="ModificationAnnonce.html?"+idcompany;
+          document.location.href="ModificationEntreprise.html?"+idcompany;
         };
 </script>
   <!-- JavaScript Libraries -->
+
   <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
   <script src="lib/owlcarousel/owl.carousel.min.js"></script>

@@ -45,7 +45,7 @@
                             <div>
                                 <div class="input-group">
                                     <label class="label">Nombre de carton large (taille L)  </label>
-                                    <input class="input--style-4" type="number" name="nb_carton_L">
+                                    <input class="input--style-4" type="number" name="nb_carton_L" id="cartonL">
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                             <div>
                                 <div class="input-group">
                                     <label class="label">Nombre de carton médium (taille M)  </label>
-                                    <input class="input--style-4" type="number" name="nb_carton_M">
+                                    <input class="input--style-4" type="number" name="nb_carton_M" id="cartonM">
                                 </div>
                             </div>
                         </div>
@@ -61,36 +61,45 @@
                             <div>
                                 <div class="input-group">
                                     <label class="label">Nombre de carton small (taille s)  </label>
-                                    <input class="input--style-4" type="number" name="nb_carton_S">
+                                    <input class="input--style-4" type="number" name="nb_carton_S"  id="cartonS">
+                                </div>
+                            </div>
+                        </div>
+                         <div class="row row-space">
+                            <div>
+                                <div class="input-group">
+                                    <label class="label">Description de l'annonce </label>
+                                    <textarea class="input--style-4" type="text" name="description_annonce"  id="description"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue">Enregistrer</button>
+                            <button class="btn btn--radius-2 btn--blue" onclick="ModificationAdvertisement()">Enregistrer</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
     var url = window.location.href;
     var split = url.split("?");
-  var idCompany = split[1];
-   var idAvertisement = split[2];
-  window.location.replace("ModificationAnnonce.html");
+    var idCompany = split[1];
+    var idAvertisement = split[2];
+    window.history.pushState("object or string", "Title", "ModificationAnnonce.html");
     $.ajax({
           type: "GET",
-          url: "localhost:8081/advertisement/" + idcompany,
+          url: "localhost:8081/advertisement/" + idCompany + idAvertisement ,
           contentType: "application/json; charset=utf-8",
           dataType: "json",
         success: function( result){
-            $(result).each(function (index, m){
-                  var ligne = $("<div class=\"col-md-4 col-sm-4 col-xs-12\">");
-                  ligne.append($("<div class=\"about-move\">"));
-                  
-                });
+                document.getElementById("datefield").value = result.availabilityDate;
+                document.getElementById("cartonL").value = result.large;
+                document.getElementById("cartonM").value = result.medium;
+                document.getElementById("cartonS").value = result.small;
+                document.getElementById("description").value = result.description;
             },
             error: function (errormessage) {
             alert(errormessage.responseText);
@@ -112,9 +121,29 @@
     today = yyyy+'-'+mm+'-'+dd;
     document.getElementById("datefield").setAttribute("min", today);
 
-
-
-
+function ModificationAdvertisement(){
+    $.ajax({
+          type: "PUT",
+          url: "localhost:8081/advertisement/" + idCompany + idAvertisement ,
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          data: {
+            idAdvertisement: idAvertisement,
+            availabilityDate: document.getElementById("datefield").value,
+            description: document.getElementById("datefield").value,
+            large: document.getElementById("cartonL").value,
+            medium: document.getElementById("cartonM").value,
+            small: document.getElementById("cartonS").value,
+            idCompany: idCompany,
+          },
+        success: function( result){
+            document.location.href="HomePage.html?"+idCompany;
+        },
+        error: function (errormessage) {
+            alert("waza");
+        }
+    });
+}
 </script>
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>

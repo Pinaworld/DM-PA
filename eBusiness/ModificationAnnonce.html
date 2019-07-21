@@ -88,18 +88,21 @@
     var split = url.split("?");
     var idCompany = split[1];
     var idAvertisement = split[2];
-    window.history.pushState("object or string", "Title", "ModificationAnnonce.html");
+    //window.history.pushState("object or string", "Title", "ModificationAnnonce.html");
     $.ajax({
           type: "GET",
-          url: "http://127.0.0.1:8081/advertisement/" + idCompany + idAvertisement ,
+          url: "http://127.0.0.1:8081/advertisement/" + idCompany +"/"+ idAvertisement,
           contentType: "application/json; charset=utf-8",
           dataType: "json",
         success: function( result){
-                document.getElementById("datefield").value = result.availabilityDate;
-                document.getElementById("cartonL").value = result.large;
-                document.getElementById("cartonM").value = result.medium;
-                document.getElementById("cartonS").value = result.small;
-                document.getElementById("description").value = result.description;
+                $(result).each(function (index, m){
+                    var date = m.availabilityDate.split("T");
+                    document.getElementById("datefield").value = date[0];
+                    document.getElementById("cartonL").value = m.large;
+                    document.getElementById("cartonM").value = m.medium;
+                    document.getElementById("cartonS").value = m.small;
+                    document.getElementById("description").value = m.description;
+                })
             },
             error: function (errormessage) {
             alert("erreur lors du get advertisement");
@@ -124,9 +127,7 @@
 function ModificationAdvertisement(){
     $.ajax({
           type: "PUT",
-          url: "http://127.0.0.1:8081/advertisement/" + idCompany + idAvertisement ,
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
+          url: "http://127.0.0.1:8081/advertisement/" + idCompany + "/" +idAvertisement,
           data: {
             idAdvertisement: idAvertisement,
             availabilityDate: document.getElementById("datefield").value,
@@ -141,6 +142,9 @@ function ModificationAdvertisement(){
         },
         error: function (errormessage) {
             alert("problème lors de la mise à jour de l'annonce");
+        },
+        complete: function(result){
+            document.location.href="HomePage.html?"+idCompany;
         }
     });
 }

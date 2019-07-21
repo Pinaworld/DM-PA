@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" onclick="ModificationAdvertisement()">Enregistrer</button>
+                            <button class="btn btn--radius-2 btn--blue" onclick="ModificationEntreprise()">Enregistrer</button>
                         </div>
                     </form>
                 </div>
@@ -138,12 +138,12 @@
                 document.getElementById("mdp2").value = m.password;
 				});
             },
-            error: function (errormessage) {
+        error: function (errormessage) {
             alert("problème sur le get");
         }
     });
 
-function ModificationAdvertisement(){
+function ModificationEntreprise(){
 
     var nomEntreprise = document.getElementById("nameEntreprise").value;
      var sirenEntreprise =document.getElementById("sirenEntreprise").value;
@@ -161,8 +161,6 @@ function ModificationAdvertisement(){
                 $.ajax({
                       type: "PUT",
                       url: "http://127.0.0.1:8081/company/" + idCompany,
-                      contentType: "application/json; charset=utf-8",
-                      dataType: "json",
                       data: {
                         name: nomEntreprise,
                         SIREN: sirenEntreprise,
@@ -178,6 +176,9 @@ function ModificationAdvertisement(){
                     },
                     error: function (errormessage) {
                         alert("il y a eu une erreur lors de la modification de l'entreprise");
+                    },
+                    complete: function(result){
+                        document.location.href="HomePage.html?"+idCompany;
                     }
                 });
             }else{

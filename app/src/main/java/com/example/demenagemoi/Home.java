@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class Home extends AppCompatActivity {
 
@@ -12,6 +14,9 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        TextView bonjourNom = (TextView) findViewById(R.id.BonjourName);
+        bonjourNom.setText(""); //REQUETE RECUPERATION DU NOM
     }
 
     public void DeconnectionActivity(View view){
@@ -37,5 +42,10 @@ public class Home extends AppCompatActivity {
     public void MapCarboardActivty(View view){
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

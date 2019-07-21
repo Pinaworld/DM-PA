@@ -426,7 +426,7 @@
       //window.location.replace("HomePage.html");
       $.ajax({
             type: "GET",
-            url: "localhost:8081/advertisement/" + idcompany,
+            url: "http://127.0.0.1:8081/advertisement/"+ idcompany,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function( result){
@@ -454,12 +454,12 @@
         });
       $.ajax({
             type: "GET",
-            url: "localhost:8081/company/1", //+ idcompany,
+            url: "http://127.0.0.1:8081/company/"+ idcompany,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function( result){
               $(result).each(function (index, m){
-                    ligne.append($("<p>" + m.SIREN+"</p>"));
+					var ligne = $("<p>" + m.SIREN+"</p>");
                     $('#tel').append(ligne);
                   });
             },
@@ -474,7 +474,7 @@ function ModifierAdvertisement(idAvertisement){
 function AjoutAdvertisement(){
   document.location.href="RegistrationAnnonce.html?"+idcompany;
 };
-function ModificationEntreprise(idcompany){
+function ModificationEntreprise(){
   document.location.href="ModificationEntreprise.html?"+idcompany;
 };
 </script>

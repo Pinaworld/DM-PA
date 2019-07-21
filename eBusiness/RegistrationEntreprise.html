@@ -91,7 +91,7 @@
 
                                   <label class="label">Mot de passe</label>
                                  
-                                    <input class="input--style-4  input100" type="password" name="mot de passe" id="mdp">
+                                    <input class="input--style-4  input100" type="password" name="mot de passe" id="mdp1">
                                     <span class="focus-input100" data-placeholder="Mot de passe"></span>
                                 </div>
                             </div>
@@ -126,22 +126,22 @@
 
 function RegistrationEntreprise(){
 
-    var nomEntreprise1 = document.getElementById("nameEntreprise").value;
-    var sirenEntreprise1 =document.getElementById("sirenEntreprise").value;
-    var city1 = document.getElementById("city").value;
-    var numaddress1 =document.getElementById("numaddress").value;
-    var address1 =document.getElementById("address").value ;
-    var zipCode1 =document.getElementById("zipCode").value;
-    var mail1 =document.getElementById("mail").value;
-    var mdp1 =document.getElementById("mdp").value;
-    var mdp21 =document.getElementById("mdp2").value;
+    var nomEntreprise = document.getElementById("nameEntreprise").value;
+    var sirenEntreprise =document.getElementById("sirenEntreprise").value;
+    var city = document.getElementById("city").value;
+    var numaddress =document.getElementById("numaddress").value;
+    var address =document.getElementById("address").value ;
+    var zipCode =document.getElementById("zipCode").value;
+    var mail =document.getElementById("mail").value;
+    var mdp =document.getElementById("mdp1").value;
+    var mdp2 =document.getElementById("mdp2").value;
 
     if(mdp == mdp2){
         if(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{12,})$/.test(mdp) == true){
             if(nomEntreprise.lenght != 0 && sirenEntreprise.lenght != 0 && city.lenght != 0 && numaddress.lenght != 0 && address.lenght != 0 && zipCode.lenght != 0 && mail.lenght != 0){
                 $.ajax({
                       type: "POST",
-                      url: "localhost:8081/company/",
+                      url: "http://127.0.0.1:8081/company/",
                       data: {
                         name: nomEntreprise,
                         SIREN: sirenEntreprise,

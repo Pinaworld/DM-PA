@@ -83,6 +83,17 @@
     </div>
 
 
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -126,21 +137,20 @@ function EnregistrerAdvertisement(){
     }
     if(small.lenght != 0){
         small = "0";
-    }$.ajax({
+    }
+    $.ajax({
         type: "POST",
-        url: "localhost:8081/advertisement/" + idCompany,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
+        url: "http://127.0.0.1:8081/advertisement/1",
         data: {
-        availabilityDate: availabilityDate,
-        description: description,
-        large: large,
-        medium: medium,
-        small: small,
-        idCompany: idCompany,
+            availabilityDate: availabilityDate,
+            description: description,
+            large: large,
+            medium: medium,
+            small: small,
+            idCompany: idcompany
         },
         success: function( result){
-            document.location.href="HomePage.html?"+idCompany;
+            document.location.href="HomePage.html?"+idcompany;
         },
         error: function (errormessage) {
             alert("problème lors de l'enregistrement de l'annonce");
@@ -148,17 +158,29 @@ function EnregistrerAdvertisement(){
     });
 }
 
-
+/*
+$.ajax({
+  type: "POST",
+  url: "http://127.0.0.1:8081/company/",
+  data: {
+    name: nomEntreprise,
+    SIREN: sirenEntreprise,
+    city: city,
+    street: address,
+    number: numaddress,
+    zipCode: zipCode,
+    email: mail,
+    password: mdp
+  },
+success: function( result){
+    document.location.href="index.html?";
+},
+error: function (errormessage) {
+    alert("il y a eu une erreur lors de la modification de l'entreprise");
+}
+});
+*/
 
 </script>
-    <!-- Jquery JS-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="vendor/select2/select2.min.js"></script>
-    <script src="vendor/datepicker/moment.min.js"></script>
-    <script src="vendor/datepicker/daterangepicker.js"></script>
-
-    <!-- Main JS-->
-    <script src="js/global.js"></script>
 
 </body>

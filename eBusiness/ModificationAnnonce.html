@@ -91,7 +91,7 @@
     window.history.pushState("object or string", "Title", "ModificationAnnonce.html");
     $.ajax({
           type: "GET",
-          url: "localhost:8081/advertisement/" + idCompany + idAvertisement ,
+          url: "http://127.0.0.1:8081/advertisement/" + idCompany + idAvertisement ,
           contentType: "application/json; charset=utf-8",
           dataType: "json",
         success: function( result){
@@ -124,7 +124,7 @@
 function ModificationAdvertisement(){
     $.ajax({
           type: "PUT",
-          url: "localhost:8081/advertisement/" + idCompany + idAvertisement ,
+          url: "http://127.0.0.1:8081/advertisement/" + idCompany + idAvertisement ,
           contentType: "application/json; charset=utf-8",
           dataType: "json",
           data: {

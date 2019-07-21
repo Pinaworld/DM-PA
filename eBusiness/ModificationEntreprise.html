@@ -104,6 +104,15 @@
             </div>
         </div>
     </div>
+	  <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -113,19 +122,21 @@
     window.history.pushState("object or string", "Title", "ModificationEntreprise.html");
     $.ajax({
           type: "GET",
-          url: "localhost:8081/company/" + idCompany ,
+          url: "http://127.0.0.1:8081/company/" + idCompany ,
           contentType: "application/json; charset=utf-8",
           dataType: "json",
-        success: function( result){
-                document.getElementById("nameEntreprise").value = result.name;
-                document.getElementById("sirenEntreprise").value = result.SIREN;
-                document.getElementById("city").value = result.city;
-                document.getElementById("numaddress").value = result.number;
-                document.getElementById("address").value = result.street;
-                document.getElementById("zipCode").value = result.zipCode;
-                document.getElementById("mail").value = result.email;
-                document.getElementById("mdp").value = result.password;
-                document.getElementById("mdp2").value = result.password;
+        success: function(result){
+		 $(result).each(function (index, m){
+                document.getElementById("nameEntreprise").value = m.name;
+                document.getElementById("sirenEntreprise").value = m.SIREN;
+                document.getElementById("city").value = m.city;
+                document.getElementById("numaddress").value = m.number;
+                document.getElementById("address").value = m.street;
+                document.getElementById("zipCode").value = m.zipCode;
+                document.getElementById("mail").value = m.email;
+                document.getElementById("mdp").value = m.password;
+                document.getElementById("mdp2").value = m.password;
+				});
             },
             error: function (errormessage) {
             alert("problème sur le get");
@@ -149,15 +160,15 @@ function ModificationAdvertisement(){
             if(nomEntreprise.lenght != 0 && sirenEntreprise.lenght != 0 && city.lenght != 0 && numaddress.lenght != 0 && address.lenght != 0 && zipCode.lenght != 0 && mail.lenght != 0){
                 $.ajax({
                       type: "PUT",
-                      url: "localhost:8081/company/" + idCompany,
+                      url: "http://127.0.0.1:8081/company/" + idCompany,
                       contentType: "application/json; charset=utf-8",
                       dataType: "json",
                       data: {
                         name: nomEntreprise,
                         SIREN: sirenEntreprise,
                         city: city,
-                        number: numaddress,
                         street: address,
+                        number: numaddress,
                         zipCode: zipCode,
                         email: mail,
                         password: mdp
@@ -180,15 +191,7 @@ function ModificationAdvertisement(){
     }
 }
 </script>
-    <!-- Jquery JS-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="vendor/select2/select2.min.js"></script>
-    <script src="vendor/datepicker/moment.min.js"></script>
-    <script src="vendor/datepicker/daterangepicker.js"></script>
-
-    <!-- Main JS-->
-    <script src="js/global.js"></script>
+  
 
 
 </body>

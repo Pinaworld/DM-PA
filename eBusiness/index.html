@@ -52,7 +52,9 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<input type="button" class=" login100-form-btn" name="connexion" id="connexxxxxion">
+							<button class="login100-form-btn">
+								Login
+							</button>
 						</div>
 					</div>
 
@@ -72,36 +74,9 @@
 	
 
   <script type="text/javascript">
-  	$.(document).(ready(function(){}));
-  	$.(document).ready(function(){
-
-  		$('#submit').on('click', function(){
-  		$('#connexxxxxion').click(function(){
-	       var email = document.getElementById("mail").value;
-	       var mdp = document.getElementById("mdp").value;
-	       
-		    if(validate(email) != false && mdp.length != 0 ){
-		        $.ajax({
-		          type: 'POST',
-		          url: "localhost:8081/user/login",
-		          data: {
-		            email: email,
-		            password: mdp
-		          },
-		          success: function(data) {
-		            sessionStorage.setItem('tokken', 'LE TOKEN RETORUN2 PAR L API');
-		            document.location.href="HomePage.html"
-		          },
-		          error: function(errormessage){
-		            alert(errormessage.responseText);
-		          }
-		        });
-		    }
-  		});
-	});
     
   </script>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->

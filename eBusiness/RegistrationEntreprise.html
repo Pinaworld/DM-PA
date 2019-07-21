@@ -39,13 +39,13 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Nom de l'entreprise</label>
-                                    <input class="input--style-4" type="text" name="name">
+                                    <input class="input--style-4" type="text" name="name" id="nameEntreprise">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Siren</label>
-                                    <input class="input--style-4" type="Number" name="siren">
+                                    <input class="input--style-4" type="Number" name="siren" id="sirenEntreprise">
                                 </div>
                             </div>
                         </div>
@@ -53,13 +53,21 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Ville</label>
-                                    <input class="input--style-4" type="text" name="ville">
+                                    <input class="input--style-4" type="text" name="ville" id="city">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Numéro de rue</label>
+                                    <input class="input--style-4" type="Number" name="ville" id="numaddress">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Adresse</label>
-                                    <input class="input--style-4" type="text" name="location">
+                                    <input class="input--style-4" type="text" name="location" id="address">
                                 </div>
                             </div>
                         </div>
@@ -67,42 +75,94 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Code postal</label>
-                                    <input class="input--style-4" type="text" name="zipcode">
+                                    <input class="input--style-4" type="number" max="95880" name="zipcode" id="zipCode">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="email">
+                                    <input class="input--style-4" type="email" name="email" id="mail">
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group validate-input">
+
                                   <label class="label">Mot de passe</label>
-                                    <input class="input--style-4  input100" type="password" name="pass" id="mdp">
+                                 
+                                    <input class="input--style-4  input100" type="password" name="mot de passe" id="mdp">
                                     <span class="focus-input100" data-placeholder="Mot de passe"></span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group validate-input">
                                   <label class="label">Confirmez votre mot de passe</label>
-                                    <input class="input--style-4  input100" type="password" name="pass" id="mdp">
+                                    <input class="input--style-4  input100" type="password" name="pass" id="mdp2">
                                     <span class="focus-input100" data-placeholder="Mot de passe"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class=" p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" >Enregistrer</button>
-
-                            <button position="" class="btn btn--radius-2 btn--blue" >Enregistrer</button>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" onclick="ModificationAdvertisement()">Enregistrer</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+function ModificationAdvertisement(){
+
+    var nomEntreprise = document.getElementById("nameEntreprise").value;
+    var sirenEntreprise =document.getElementById("sirenEntreprise").value;
+    var city = document.getElementById("city").value;
+    var numaddress =document.getElementById("numaddress").value;
+    var address =document.getElementById("address").value ;
+    var zipCode =document.getElementById("zipCode").value;
+    var mail =document.getElementById("mail").value;
+    var mdp =document.getElementById("mdp").value;
+    var mdp2 =document.getElementById("mdp2").value;
+
+    if(mdp == mdp2){
+        if(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{12,})$/.test(mdp) == true){
+            if(nomEntreprise.lenght != 0 && sirenEntreprise.lenght != 0 && city.lenght != 0 && numaddress.lenght != 0 && address.lenght != 0 && zipCode.lenght != 0 && mail.lenght != 0){
+                $.ajax({
+                      type: "POST",
+                      url: "localhost:8081/company/",
+                      contentType: "application/json; charset=utf-8",
+                      dataType: "json",
+                      data: {
+                        name: nomEntreprise,
+                        SIREN: sirenEntreprise,
+                        city: city,
+                        number: numaddress,
+                        street: address,
+                        zipCode: zipCode,
+                        email: mail,
+                        password: mdp
+                      },
+                    success: function( result){
+                        document.location.href="index.html?";
+                    },
+                    error: function (errormessage) {
+                        alert("il y a eu une erreur lors de la modification de l'entreprise");
+                    }
+                });
+            }else{
+                alert("Tout doit être renseigné !");
+            }
+        }else{
+            alert("les mots de passes ne remplissent pas les conditions de sécurités : il faut au moins 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère spécial et une taille au dessus de 12");
+        }
+    }else{
+        alert("mots de passe différents ");
+    }
+}
+</script>
 
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>

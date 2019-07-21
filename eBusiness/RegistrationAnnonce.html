@@ -107,6 +107,9 @@
     today = yyyy+'-'+mm+'-'+dd;
     document.getElementById("datefield").setAttribute("min", today);
     document.getElementById("datefield").setAttribute("value", today);
+    document.getElementById("cartonS").setAttribute("value", "0");
+    document.getElementById("cartonM").setAttribute("value", "0");
+    document.getElementById("cartonL").setAttribute("value", "0");
 
 function EnregistrerAdvertisement(){
     var availabilityDate =  document.getElementById("datefield").value;
@@ -115,30 +118,34 @@ function EnregistrerAdvertisement(){
     var medium =  document.getElementById("cartonM").value;
     var small =  document.getElementById("cartonS").value;
 
-    if(description.lenght != 0 && large.lenght != 0 && medium.lenght != 0 && small.lenght != 0){
-        $.ajax({
-            type: "POST",
-            url: "localhost:8081/advertisement/" + idCompany,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: {
-            availabilityDate: availabilityDate,
-            description: description,
-            large: large,
-            medium: medium,
-            small: small,
-            idCompany: idCompany,
-            },
-            success: function( result){
-                document.location.href="HomePage.html?"+idCompany;
-            },
-            error: function (errormessage) {
-                alert("problème lors de l'enregistrement de l'annonce");
-            }
-        });
-    }else{
-        alert("veuillez rentrer tous les champs");
+    if(large.lenght != 0){
+        large = "0";
     }
+    if(medium.lenght != 0){
+        medium = "0";
+    }
+    if(small.lenght != 0){
+        small = "0";
+    }$.ajax({
+        type: "POST",
+        url: "localhost:8081/advertisement/" + idCompany,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: {
+        availabilityDate: availabilityDate,
+        description: description,
+        large: large,
+        medium: medium,
+        small: small,
+        idCompany: idCompany,
+        },
+        success: function( result){
+            document.location.href="HomePage.html?"+idCompany;
+        },
+        error: function (errormessage) {
+            alert("problème lors de l'enregistrement de l'annonce");
+        }
+    });
 }
 
 

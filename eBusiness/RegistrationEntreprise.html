@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" onclick="ModificationAdvertisement()">Enregistrer</button>
+                            <button class="btn btn--radius-2 btn--blue" onclick="RegistrationEntreprise()">Enregistrer</button>
                         </div>
                     </form>
                 </div>
@@ -115,7 +115,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-function ModificationAdvertisement(){
+function RegistrationEntreprise(){
 
     var nomEntreprise = document.getElementById("nameEntreprise").value;
     var sirenEntreprise =document.getElementById("sirenEntreprise").value;
@@ -133,14 +133,12 @@ function ModificationAdvertisement(){
                 $.ajax({
                       type: "POST",
                       url: "localhost:8081/company/",
-                      contentType: "application/json; charset=utf-8",
-                      dataType: "json",
                       data: {
                         name: nomEntreprise,
                         SIREN: sirenEntreprise,
                         city: city,
-                        number: numaddress,
                         street: address,
+                        number: numaddress,
                         zipCode: zipCode,
                         email: mail,
                         password: mdp

@@ -52,7 +52,7 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn">
+							<button class="login100-form-btn" onclick="RegistrationEntreprise()">
 								Login
 							</button>
 						</div>
@@ -73,10 +73,39 @@
 	</div>
 	
 
-  <script type="text/javascript">
-    
-  </script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+function ModificationAdvertisement(){
+
+    var email = document.getElementById("mail").value;
+    var mdp =document.getElementById("mdp").value;
+ 
+    $.ajax({
+          type: "POST",
+          url: "localhost:8081/user/login",
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          data: {
+            email: email,
+            password: mdp
+          },
+        success: function( result){
+            document.location.href="HomePage.html?";
+        },
+        error: function (errormessage) {
+            alert("il y a eu une erreur lors de la modification de l'entreprise");
+        }
+    });
+}
+
+
+
+ </script>
+
+
+
+
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->

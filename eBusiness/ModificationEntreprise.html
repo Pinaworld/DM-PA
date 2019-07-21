@@ -26,6 +26,9 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
+                    <button class="buttonreturn" onclick="Retour()" >
+                        <img src="images/return.png">
+                    </button>
                     <h2 class="title"> Modifiez votre entreprise !</h2>
                     <form class="login100-form validate-form">
                         <div class="row row-space">
@@ -161,6 +164,7 @@ function ModificationEntreprise(){
                 $.ajax({
                       type: "PUT",
                       url: "http://127.0.0.1:8081/company/" + idCompany,
+                      async: false,
                       data: {
                         name: nomEntreprise,
                         SIREN: sirenEntreprise,
@@ -172,7 +176,7 @@ function ModificationEntreprise(){
                         password: mdp
                       },
                     success: function( result){
-                        document.location.href="HomePage.html?"+idCompany;
+                         document.location.href="HomePage.html?" + idcompany;
                     },
                     error: function (errormessage) {
                         alert("il y a eu une erreur lors de la modification de l'entreprise");
@@ -190,7 +194,12 @@ function ModificationEntreprise(){
     }else{
         alert("mots de passe différents ");
     }
+    document.location.href="HomePage.html?" + idcompany;
 }
+function Retour(){
+    document.location.href="HomePage.html?" + idcompany;
+}
+
 </script>
   
 

@@ -29,6 +29,9 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
+                    <button class="buttonreturn" onclick="Retour()" >
+                        <img src="images/return.png">
+                    </button>
                     <h2 class="title"> Modifiez votre annonce !</h2>
                     <form >
                         <div class="row row-space">
@@ -81,6 +84,16 @@
             </div>
         </div>
     </div>
+        <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -93,6 +106,7 @@
           type: "GET",
           url: "http://127.0.0.1:8081/advertisement/" + idCompany +"/"+ idAvertisement,
           contentType: "application/json; charset=utf-8",
+          
           dataType: "json",
         success: function( result){
                 $(result).each(function (index, m){
@@ -148,15 +162,9 @@ function ModificationAdvertisement(){
         }
     });
 }
+function Retour(){
+    document.location.href="HomePage.html?" + idcompany;
+}
 </script>
-    <!-- Jquery JS-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="vendor/select2/select2.min.js"></script>
-    <script src="vendor/datepicker/moment.min.js"></script>
-    <script src="vendor/datepicker/daterangepicker.js"></script>
-
-    <!-- Main JS-->
-    <script src="js/global.js"></script>
 
 </body>

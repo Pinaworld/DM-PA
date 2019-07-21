@@ -30,9 +30,9 @@
             <div class="card card-4">
 
                 <div class="card-body">
-                    <a class="buttonreturn" href="index.html">
-                        <img src="https://img.icons8.com/metro/26/000000/return.png">
-                    </a>
+                    <button class="buttonreturn" onclick="Retour()" >
+                        <img src="images/return.png">
+                    </button>
                     <h2 class="title"> Enregistrez votre entreprise !</h2>
                     <form class="login100-form validate-form">
                         <div class="row row-space">
@@ -168,6 +168,11 @@ function RegistrationEntreprise(){
     }else{
         alert("mots de passe différents ");
     }
+}
+
+
+function Retour(){
+    document.location.href="index.html";
 }
 </script>
 

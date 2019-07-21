@@ -29,6 +29,9 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
+                    <button class="buttonreturn" onclick="Retour()" >
+                        <img src="images/return.png">
+                    </button>
                     <h2 class="title"> Enregistrez votre annonce !</h2>
                     <form >
                       <div class="row row-space">
@@ -141,6 +144,7 @@ function EnregistrerAdvertisement(){
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1:8081/advertisement/1",
+        
         data: {
             availabilityDate: availabilityDate,
             description: description,
@@ -157,6 +161,10 @@ function EnregistrerAdvertisement(){
         }
     });
 }
+function Retour(){
+    document.location.href="HomePage.html?" + idcompany;
+}
+
 
 
 </script>

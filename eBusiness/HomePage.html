@@ -77,7 +77,7 @@
                     <a class="page-scroll" href="#services">Voir les annonces</a>
                   </li>
                   <li class="active">
-                    <a class="page-scroll" href="#home">Déconnexion</a>
+                    <a class="page-scroll" onclick="Deconnexion()">Déconnexion</a>
                   </li>
                 </ul>
               </div>
@@ -211,8 +211,7 @@
       <div class="container ">
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="section-headline text-center">
-              <h2>Votre Entreprise</h2>
+            <div class="section-headline text-center" id="nameentreprise">
             </div>
           </div>
         </div>
@@ -220,34 +219,23 @@
           <!-- Start contact icon column -->
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="contact-icon text-center">
-              <div class="single-icon">
-                <i class="fa fa-mobile"></i>
-                <p id="tel">
-                  Téléphone: 01 23 45 00 00<br>
-                </p>
+              <div class="single-icon" id="tout">
+                
               </div>
             </div>
           </div>
           <!-- Start contact icon column -->
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="contact-icon text-center">
-              <div class="single-icon">
-                <i class="fa fa-envelope-o"></i>
-                <p>
-                  Email: demenagemoi.support@gmail.com<br>
-                </p>
+              <div class="single-icon" id="emailentreprise">
+                
               </div>
             </div>
           </div>
           <!-- Start contact icon column -->
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="contact-icon text-center">
-              <div class="single-icon">
-                <i class="fa fa-map-marker"></i>
-                <p>
-                  Coordonnées : 35 Rue Michel Grand-Marcel<br>
-                  <span>75001, Paris</span>
-                </p>
+              <div class="single-icon" id="position">
               </div>
             </div>
           </div>
@@ -307,12 +295,13 @@
                     ligne.append($("<div class= \"services-details\">"));
                     ligne.append($("<div class=\"single-services\">"));
                     ligne.append($("<a class=\"services-icon\" href=\"#\"> <i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i> </a>"));
-                    ligne.append($("<h4>"+m.availabilityDate+"</h4>"));
-                    ligne.append($("<p>" + m.large +"</p>"));
-                    ligne.append($("<p>" + m.medium +"</p>"));
-                    ligne.append($("<p>" + m.small +"</p>"));
-                    ligne.append($("</div>"));
+                    var date = m.availabilityDate.split("T");
+                    ligne.append($("<h4>"+date[0]+"</h4>"));
+                    ligne.append($("<p> nombre carton large : " + m.large +"</p>"));
+                    ligne.append($("<p>nombre carton medium : " + m.medium +"</p>"));
+                    ligne.append($("<p>nombre carton small : " + m.small +"</p>"));
                     ligne.append($("<button  class=\"btn--blue btn--radius-2\" value=\"Modifier\"  onClick=\"ModifierAdvertisement("+m.idAdvertisement+")\"> Modifier </button>"));
+                    ligne.append($("</div>"));
                     ligne.append($("</div>"));
                     ligne.append($("</div>"));
                     ligne.append($("</div>"));
@@ -330,8 +319,14 @@
             dataType: "json",
             success: function( result){
               $(result).each(function (index, m){
-					var ligne = $("<p>" + m.SIREN+"</p>");
-                    $('#tel').append(ligne);
+					         var ligne1 = $("<i class=\"fa fa-address-card-o\"></i><p> SIREN : " + m.SIREN+"</p>");
+                   var ligne2 = $("<i class=\"fa fa-map-marker\"></i><p>" + m.number+ " " +m.street+"<br><span>"+m.zipCode+", "+m.city+"</span></p>");
+                   var ligne3 = $("<h2>" + m.name+"</h2>");
+                   var ligne4 = $("<i class=\"fa fa-envelope-o\"></i><p>" + m.email+"</p>");
+                    $('#tout').append(ligne1);
+                    $('#position').append(ligne2);
+                    $('#nameentreprise').append(ligne3);
+                    $('#emailentreprise').append(ligne4);
                   });
             },
               error: function (errormessage) {
@@ -347,6 +342,9 @@ function AjoutAdvertisement(){
 };
 function ModificationEntreprise(){
   document.location.href="ModificationEntreprise.html?"+idcompany;
+};
+function Deconnexion(){
+  document.location.href="index.html";
 };
 </script>
   <!-- JavaScript Libraries -->

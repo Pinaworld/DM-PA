@@ -71,10 +71,10 @@
               <div class="collapse navbar-collapse main-menu bs-example-navbar-collapse-1" id="navbar-example">
                 <ul class="nav navbar-nav navbar-right">
                   <li>
-                    <a class="page-scroll" href="#contact">Entreprise</a>
+                    <a class="page-scroll" href="#contact">Votre entreprise</a>
                   </li>
                   <li>
-                    <a class="page-scroll" href="#services">Annonces</a>
+                    <a class="page-scroll" href="#services">Voir les annonces</a>
                   </li>
                   <li class="active">
                     <a class="page-scroll" href="#home">Déconnexion</a>
@@ -163,7 +163,46 @@
       </div>
     </div>
   </div>
-  <!-- End Slider Area -->
+
+    <!-- End Slider Area -->
+
+
+
+
+  
+
+<!-- Start Service area -->
+  <div id="services" class="services-area area-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="section-headline services-head text-center">
+            <h2>Vos Annonces</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="services-contents" id="displayAdvertisement">
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="contact-icon text-center">
+        <div class="single-icon">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="contact-icon text-center">
+        <div class="single-icon">
+          <div class="p-t-15">
+              <button class="btn btn--radius-2 btn--blue" onclick="AjoutAdvertisement()">Ajouter une annonce</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Start Service area -->
   <div id="services" class="services-area area-padding">
@@ -182,14 +221,15 @@
             <div class="about-move">
               <div class="services-details">
                 <div class="single-services">
-                  <a class="services-icon" href="#">
+                  <div class="services-icon">
 											<i class="fa fa-code"></i>
-										</a>
+										</div>
                   <h4>Expert Coder</h4>
                   <p>
                     will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
                   </p>
                 </div>
+                <input id="btnModifier"  type="button" value="Modifier" onClick="">
               </div>
               <!-- end about-details -->
             </div>
@@ -207,14 +247,13 @@
                     will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
                   </p>
                 </div>
+                <input  class="btn--blue btn--radius-2 " type="button" value="Modifier" onClick="">
               </div>
               <!-- end about-details -->
             </div>
           </div>
 
-          <div id="displayAdvertisement">
-            
-          </div>
+          
           <div class="col-md-4 col-sm-4 col-xs-12">
             <!-- end col-md-4 -->
             <div class=" about-move">
@@ -228,10 +267,12 @@
                     will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
                   </p>
                 </div>
+                 <input id="btnModifier"  type="button" value="Modifier" onClick="">
               </div>
               <!-- end about-details -->
             </div>
           </div>
+
           <div class="col-md-4 col-sm-4 col-xs-12">
             <!-- end col-md-4 -->
             <div class=" about-move">
@@ -290,7 +331,6 @@
     </div>
   </div>
   <!-- End Service area -->
-
 
 
   <!-- Start contact Area -->
@@ -385,39 +425,27 @@
                     ligne.append($("<p>" + m.medium +"</p>"));
                     ligne.append($("<p>" + m.small +"</p>"));
                     ligne.append($("</div>"));
+                    ligne.append($("<input  class=\"btn--blue btn--radius-2\" type=\"button\" value=\"Modifier\" onClick=\"ModifierAdvertisement("+m.idAvertisement+"\">"));
                     ligne.append($("</div>"));
                     ligne.append($("</div>"));
                     ligne.append($("</div>"));
-
-                      ligne.append($("<td> <input id=\"btnModifier\"  type=\"button\" value=\"Modifier\" onClick=\"ModifierAdvertisement("+m.idAdvertisement+")\"> </td>"));
-                      $('#displayAdvertisement').append(ligne);
+                    $('#displayAdvertisement').append(ligne);
                   });
             },
               error: function (errormessage) {
-              alert(errormessage.responseText);
+              alert("erreur sur le get all advertisements");
             }
         });
 
-        function ModifierAdvertisement(idAvertisement){
-         $.ajax({
-          type: "PUT",
-          url: "localhost:8081/advertisement/" + idcompany + idAvertisement ,
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-        success: function( result){
-                document.getElementById("datefield").value = result.availabilityDate;
-                document.getElementById("cartonL").value = result.large;
-                document.getElementById("cartonM").value = result.medium;
-                document.getElementById("cartonS").value = result.small;
-            },
-            error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
-    });
-        };
-         function ModificationEntreprise(idcompany){
-          document.location.href="ModificationEntreprise.html?"+idcompany;
-        };
+function ModifierAdvertisement(idAvertisement){
+  document.location.href="ModifierAdvertisement.html?"+idcompany + idAvertisement;
+};
+function AjoutAdvertisement(){
+  document.location.href="RegistrationAnnonce.html?"+idcompany;
+};
+function ModificationEntreprise(idcompany){
+  document.location.href="ModificationEntreprise.html?"+idcompany;
+};
 </script>
   <!-- JavaScript Libraries -->
 

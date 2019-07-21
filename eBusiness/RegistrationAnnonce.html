@@ -31,7 +31,7 @@
                 <div class="card-body">
                     <h2 class="title"> Enregistrez votre annonce !</h2>
                     <form >
-                        <div class="row row-space">
+                      <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Choisissez une date</label>
@@ -45,7 +45,7 @@
                             <div>
                                 <div class="input-group">
                                     <label class="label">Nombre de carton large (taille L)  </label>
-                                    <input class="input--style-4" type="number" name="nb_carton_L">
+                                    <input class="input--style-4" type="number" name="nb_carton_L" id="cartonL">
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                             <div>
                                 <div class="input-group">
                                     <label class="label">Nombre de carton médium (taille M)  </label>
-                                    <input class="input--style-4" type="number" name="nb_carton_M">
+                                    <input class="input--style-4" type="number" name="nb_carton_M" id="cartonM">
                                 </div>
                             </div>
                         </div>
@@ -61,19 +61,36 @@
                             <div>
                                 <div class="input-group">
                                     <label class="label">Nombre de carton small (taille s)  </label>
-                                    <input class="input--style-4" type="number" name="nb_carton_S">
+                                    <input class="input--style-4" type="number" name="nb_carton_S"  id="cartonS">
+                                </div>
+                            </div>
+                        </div>
+                         <div class="row row-space">
+                            <div>
+                                <div class="input-group">
+                                    <label class="label">Description de l'annonce </label>
+                                    <textarea class="input--style-4" type="text" name="description_annonce"  id="description"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue">Enregistrer</button>
+                            <button class="btn btn--radius-2 btn--blue" onclick="EnregistrerAdvertisement()">Enregistrer</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+ var url = window.location.href;
+      var split = url.split("?");
+      var idcompany = split[1];
+      window.history.pushState("object or string", "Title", "RegistrationAnnonce.html");
+
 
     // date du jour minimum pour le datepicker
     var today = new Date();
@@ -89,6 +106,43 @@
 
     today = yyyy+'-'+mm+'-'+dd;
     document.getElementById("datefield").setAttribute("min", today);
+    document.getElementById("datefield").setAttribute("value", today);
+
+function EnregistrerAdvertisement(){
+    var availabilityDate =  document.getElementById("datefield").value;
+    var description =  document.getElementById("description").value;
+    var large =  document.getElementById("cartonL").value;
+    var medium =  document.getElementById("cartonM").value;
+    var small =  document.getElementById("cartonS").value;
+
+    if(description.lenght != 0 && large.lenght != 0 && medium.lenght != 0 && small.lenght != 0){
+        $.ajax({
+            type: "POST",
+            url: "localhost:8081/advertisement/" + idCompany,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+            availabilityDate: availabilityDate,
+            description: description,
+            large: large,
+            medium: medium,
+            small: small,
+            idCompany: idCompany,
+            },
+            success: function( result){
+                document.location.href="HomePage.html?"+idCompany;
+            },
+            error: function (errormessage) {
+                alert("problème lors de l'enregistrement de l'annonce");
+            }
+        });
+    }else{
+        alert("veuillez rentrer tous les champs");
+    }
+}
+
+
+
 </script>
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>

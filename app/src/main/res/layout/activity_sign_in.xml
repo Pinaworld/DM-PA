@@ -7,6 +7,19 @@
     tools:context=".SignIn"
     android:background="@color/backgroungColor">
 
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progress"/>
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -74,7 +87,7 @@
         android:layout_marginBottom="8dp"
         android:background="@color/buttonSalmon"
         android:onClick="HomeActivity"
-        android:text="Connection"
+        android:text="Connexion"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/buttonText"
         app:layout_constraintBottom_toTopOf="@+id/ButtSignIn"

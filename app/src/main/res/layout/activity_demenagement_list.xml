@@ -7,6 +7,19 @@
     tools:context=".DemenagementList"
     android:background="@color/backgroungColor">
 
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progress"/>
+    </RelativeLayout>
+
     <Button
         android:id="@+id/ReturnButton"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -16,7 +29,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="BackHomeActivty"
+        android:onClick="BackHomeActivity"
         android:text="@string/Return"
         android:textColor="@color/buttonSalmon"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,7 +59,7 @@
         app:layout_constraintVertical_bias="0.035" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerList"
+        android:id="@+id/removalList"
         android:layout_width="391dp"
         android:layout_height="582dp"
         android:layout_marginStart="8dp"

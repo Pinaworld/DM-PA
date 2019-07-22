@@ -1,5 +1,7 @@
 package com.example.demenagemoi.Helpers;
 
+import com.example.demenagemoi.AuthentifiedUserID;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,8 +23,16 @@ public class Utils {
         return body;
     }
 
-    public static String addRequestParameter(String url, String parameter)
-    {
+    public static String addRequestParameter(String url, String parameter) {
         return url + parameter + "/";
+    }
+
+    public static boolean isAuthenticated() {
+        AuthentifiedUserID authentifiedUserID = AuthentifiedUserID.getInstance();
+        if (authentifiedUserID.getID() != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

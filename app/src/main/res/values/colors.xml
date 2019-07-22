@@ -2,8 +2,8 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#EB1717</color>
-    <color name="buttonSalmon">#FF7F50 </color>
+    <color name="colorAccent">#FF7F50</color>
+    <color name="buttonSalmon">#FF7F50</color>
     <color name="buttonText">#FFFFFF</color>
     <color name="backgroungColor">#C6FFF3B8</color>
 </resources>

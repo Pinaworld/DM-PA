@@ -17,6 +17,7 @@ public class Constants {
         public static final String LOGIN = BASE_USER + "login";
         public static final String GET_ALL = BASE_USER + "allUser";
         public static final String GET_BY_ID = BASE_USER;
+        public static final String UPDATE_BY_ID = BASE_USER;
         public static final String DELETE_BY_ID = BASE_USER;
     }
 
@@ -27,6 +28,7 @@ public class Constants {
         public static final String ADDRESS = "address";
         public static final String ARRIVAL_ADDRESS = "arrivalAddress";
         public static final String DESCRIPTION = "description";
+        public static final String ID_USER = "idUser";
 
         //ROUTES
         public static final String BASE_REMOVAL = "removal/";

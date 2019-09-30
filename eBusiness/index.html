@@ -42,9 +42,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Entrez un mot de passe">
-						<span class="btn-show-pass">
-							<i class="zmdi zmdi-eye"></i>
-						</span>
+						
 						<input class="input100" type="password" name="pass" id="mdp">
 						<span class="focus-input100" data-placeholder=""></span>
 					</div>
@@ -52,12 +50,12 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" onclick="logIN()">
+							<button class="login100-form-btn" id="submit">  <!-- onclick="logIN()"> -->
 								Login
 							</button>
 						</div>
 					</div>
-
+					<div><p id="test"></p></div>
 					<div class="text-center p-t-115">
 						<span class="txt1">
 							Vous n'avez pas encore de Compte ?
@@ -66,6 +64,7 @@
 						<a class="txt2" href="RegistrationEntreprise.html">
 							Enregistrez vous !
 						</a>
+						
 					</div>
 				</form>
 			</div>
@@ -87,16 +86,77 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--======================================================================================
 	<script src="js/main.js"></script>=========-->
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+
+$(document).ready(function(){
+ 
+    $("#submit").click(function(e){
+        e.preventDefault();
+ 		var id = 1;
+ 		var email = document.getElementById("mail").value;
+    	var mdp =document.getElementById("mdp").value;
+        $.post(
+            'http://127.0.0.1:8081/company/login', 
+            {
+                email : email,
+                password : mdp
+            },
+ 
+            function(data){
+ 				var data = JSON.parse(data);
+                if(data.token != undefined){
+                	sessionStorage.setItem('token', data.token);
+                	var aValue = sessionStorage.token;
+                	console.log(aValue);
+            		document.location.href="HomePage.html?" + id;
+                }
+                else{
+                    $("#test").html("<p>Erreur lors de la connexion...</p>");
+                }
+         
+            },
+            'text'
+         );
+    });
+});
+
+
+/*
 
 function logIN(){
     var email = document.getElementById("mail").value;
     var mdp =document.getElementById("mdp").value;
-    $.ajax({
-          type: "POST",
+
+    $.post(
+            'http://127.0.0.1:8081/company/login', 
+            {
+                email : email,  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
+                password : mdp
+            },
+ 
+            function(data){
+ 				console.log(data);
+                if(data == 'Success'){
+                     // Le membre est connecté. Ajoutons lui un message dans la page HTML.
+ 
+                     $("#test").html("<p>Vous avez été connecté avec succès !</p>");
+                }
+                else{
+                     // Le membre n'a pas été connecté. (data vaut ici "failed")
+ 
+                     $("#test").html("<p>Erreur lors de la connexion...</p>");
+                }
+         
+            }
+         );
+
+    /*$.ajax({
           url: "http://127.0.0.1:8081/company/login",
+          type: 'POST',
+          async : false
           data: {
             email: email,
             password: mdp
@@ -107,15 +167,14 @@ function logIN(){
         },
         error: function (errormessage) {
             alert("il y a eu une erreur lors de la modification de l'entreprise");
-        }
-        ,
+        },
         complete: function( result){
         	sessionStorage.setItem('token', result.token);
             document.location.href="HomePage.html?";
         }
     });
-    document.location.href="HomePage.html?1";
-}
+    //document.location.href="HomePage.html?1";
+}*/
 
  </script>
 

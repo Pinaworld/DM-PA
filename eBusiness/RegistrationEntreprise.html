@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" onclick="RegistrationEntreprise()">Enregistrer</button>
+                            <button class="btn btn--radius-2 btn--blue" id="submit">Enregistrer</button>
                         </div>
                     </form>
                 </div>
@@ -112,7 +112,7 @@
         </div>
     </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->
@@ -124,7 +124,10 @@
     <script src="js/global.js"></script>
 <script type="text/javascript">
 
-function RegistrationEntreprise(){
+//function RegistrationEntreprise(){
+
+ $("#submit").click(function(e){
+    e.preventDefault();
 
     var nomEntreprise = document.getElementById("nameEntreprise").value;
     var sirenEntreprise =document.getElementById("sirenEntreprise").value;
@@ -139,26 +142,32 @@ function RegistrationEntreprise(){
     if(mdp == mdp2){
         if(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{12,})$/.test(mdp) == true){
             if(nomEntreprise.lenght != 0 && sirenEntreprise.lenght != 0 && city.lenght != 0 && numaddress.lenght != 0 && address.lenght != 0 && zipCode.lenght != 0 && mail.lenght != 0){
-                $.ajax({
-                      type: "POST",
-                      url: "http://127.0.0.1:8081/company/",
-                      data: {
-                        name: nomEntreprise,
-                        SIREN: sirenEntreprise,
-                        city: city,
-                        street: address,
-                        number: numaddress,
-                        zipCode: zipCode,
-                        email: mail,
-                        password: mdp
-                      },
-                    success: function( result){
-                        document.location.href="index.html?";
-                    },
-                    error: function (errormessage) {
-                        alert("il y a eu une erreur lors de la modification de l'entreprise");
-                    }
-                });
+               
+                    $.post(
+                        'http://127.0.0.1:8081/company/', 
+                        {
+                            name: nomEntreprise,
+                            SIREN: sirenEntreprise,
+                            city: city,
+                            street: address,
+                            number: numaddress,
+                            zipCode: zipCode,
+                            email: mail,
+                            password: mdp
+                        },
+             
+                        function(data){
+                            /* ici il faudrait récupérer les id de l'entreprise pour pouvoir le mettre dans le sessionStorage*/
+
+
+                            //si data renvoie bien une company : document.location.href="HomePage.html?" + idcompany;
+
+
+
+                            document.location.href="HomePage.html?1"
+                        },
+                        ''
+                     );
             }else{
                 alert("Tout doit être renseigné !");
             }
@@ -168,7 +177,7 @@ function RegistrationEntreprise(){
     }else{
         alert("mots de passe différents ");
     }
-}
+});
 
 
 function Retour(){

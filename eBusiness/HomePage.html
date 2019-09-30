@@ -248,7 +248,7 @@
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="contact-icon text-center">
               <div class="single-icon">
-                <div class="p-t-15">
+                <div class="p-t-15" id="teststorage">
                     <button class="btn btn--radius-2 btn--blue" onclick="ModificationEntreprise()">Modifier</button>
                 </div>
               </div>
@@ -276,13 +276,16 @@
   <script src="contactform/contactform.js"></script>
 
   <script src="js/main.js"></script>
-<script type="text/javascript">
+  <script type="text/javascript">
 
       var url = window.location.href;
       var split = url.split("?");
       var idcompany = split[1];
       window.history.pushState("object or string", "Title", "HomePage.html");
+
+      //var aValue = sessionStorage.token;
       //window.location.replace("HomePage.html");
+
       $.ajax({
             type: "GET",
             url: "http://127.0.0.1:8081/advertisement/"+ idcompany,
@@ -344,6 +347,7 @@ function ModificationEntreprise(){
   document.location.href="ModificationEntreprise.html?"+idcompany;
 };
 function Deconnexion(){
+  sessionStorage.clear();
   document.location.href="index.html";
 };
 </script>

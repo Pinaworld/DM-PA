@@ -102,13 +102,14 @@ $(document).ready(function(){
                 email : email,
                 password : mdp
             },
- 
             function(data){
- 				var data = JSON.parse(data);
+ 				//var data = JSON.parse(data);
                 if(data.token != undefined){
                 	sessionStorage.setItem('token', data.token);
+                    console.log(sessionStorage.token);
                     sessionStorage.setItem('idC', 1);
-            		document.location.href="HomePage.html?" + id;
+                    console.log(sessionStorage.idC);
+            		document.location.href="HomePage.html";
                 }
                 else{
                     $("#test").html("<p>Erreur lors de la connexion...</p>");
@@ -116,7 +117,7 @@ $(document).ready(function(){
          
             },
             ''
-         );
+        )
     });
 });
  </script>

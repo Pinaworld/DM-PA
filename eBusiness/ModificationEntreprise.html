@@ -118,7 +118,11 @@
     <script src="js/global.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
-
+    //var CheminComplet = document.location.href;
+    //var NomDuFichier = CheminComplet.substring(CheminComplet.lastIndexOf( "/" )+1 );
+    //if(NomDuFichier != "ModificationEntreprise.html"){
+    //    document.location.href="ModificationEntreprise.html";
+    //}
     var idCompany = sessionStorage.idC;
     //window.history.pushState("object or string", "Title", "ModificationEntreprise.html");
     $.ajax({
@@ -174,28 +178,30 @@ function ModificationEntreprise(){
                         password: mdp
                       },
                     success: function( result){
-                         document.location.href="HomePage.html?" + idCompany;
+                         Retour();
                     },
                     error: function (errormessage) {
                         alert("il y a eu une erreur lors de la modification de l'entreprise");
                     },
                     complete: function(result){
-                        document.location.href="HomePage.html?"+idCompany;
+                        Retour();
                     }
                 });
             }else{
                 alert("Tout doit être renseigné !");
+                document.location.href="ModificationEntreprise.html";
             }
         }else{
             alert("les mots de passes ne remplissent pas les conditions de sécurités : il faut au moins 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère spécial et une taille au dessus de 12");
+            document.location.href="ModificationEntreprise.html";
         }
     }else{
         alert("mots de passe différents ");
+        document.location.href="ModificationEntreprise.html";
     }
-    document.location.href="HomePage.html?" + idCompany;
 }
 function Retour(){
-    document.location.href="HomePage.html?" + idCompany;
+    document.location.href="HomePage.html";
 }
 
 </script>

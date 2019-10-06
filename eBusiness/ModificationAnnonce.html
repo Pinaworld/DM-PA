@@ -98,7 +98,8 @@
 <script type="text/javascript">
 
     var idCompany = sessionStorage.idC;
-    var idAvertisement = split[2];
+    var urlSplit = document.location.href.split('?');
+    var idAvertisement = urlSplit[1];
     //window.history.pushState("object or string", "Title", "ModificationAnnonce.html");
     $.ajax({
           type: "GET",
@@ -137,31 +138,97 @@
     document.getElementById("datefield").setAttribute("min", today);
 
 function ModificationAdvertisement(){
+    var availabilityDate = document.getElementById("datefield").value;
+    var description = document.getElementById("description").value;
+    var large = document.getElementById("cartonL").value;
+    var medium = document.getElementById("cartonM").value;
+    var small = document.getElementById("cartonS").value;
+    $.PUT(
+        'http://127.0.0.1:8081/company/', 
+        {
+            name: nomEntreprise,
+            SIREN: sirenEntreprise,
+            city: city,
+            street: address,
+            number: numaddress,
+            zipCode: zipCode,
+            email: mail,
+            password: mdp
+        },
+
+        function(data){
+            /* ici il faudrait récupérer les id de l'entreprise pour pouvoir le mettre dans le sessionStorage*/
+
+
+            //si data renvoie bien une company : document.location.href="HomePage.html?" + idcompany;
+
+            if (data != undefined){
+                console.long("problème de traitement, veuillez reessayez");
+                document.location.href="RegistrationEntreprise.html"
+            }
+            else{
+                document.location.href=" à définir.html";
+            }
+        },
+        ''
+     );
+
+}
+/*
+    postFormData('http://127.0.0.1:8081/advertisement/'+ idCompany + '/' +idAvertisement, {idAvertisement: idAvertisement,
+            availabilityDate: availabilityDate,
+            description: description,
+            large: large,
+            medium: medium,
+            small: small,
+            idCompany: idCompany})
+    .then(data => console.error(error))
+    .catch(error => console.error(error));
+
+
+
+    document.location.href="HomePage.html";
+}
+function postFormData(url, data) {
+  return fetch(url, {
+    method: 'PUT', // 'GET', 'PUT', 'DELETE', etc.
+    body: new URLSearchParams(data),
+    headers: new Headers({
+      'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    })
+  })
+  .then(response => response.json())
+}
+*/
+
+/*
     $.ajax({
           type: "PUT",
           url: "http://127.0.0.1:8081/advertisement/" + idCompany + "/" +idAvertisement,
           data: {
-            idAdvertisement: idAvertisement,
-            availabilityDate: document.getElementById("datefield").value,
-            description: document.getElementById("description").value,
-            large: document.getElementById("cartonL").value,
-            medium: document.getElementById("cartonM").value,
-            small: document.getElementById("cartonS").value,
-            idCompany: idCompany,
+            idAvertisement: idAvertisement,
+            availabilityDate: availabilityDate,
+            description: description,
+            large: large,
+            medium: medium,
+            small: small,
+            idCompany: idCompany
           },
         success: function( result){
-            document.location.href="HomePage.html?"+idCompany;
+            document.location.href="HomePage.html";
         },
         error: function (errormessage) {
             alert("problème lors de la mise à jour de l'annonce");
         },
         complete: function(result){
-            document.location.href="HomePage.html?"+idCompany;
+            document.location.href="HomePage.html";
         }
     });
-}
+}*/
+
+
 function Retour(){
-    document.location.href="HomePage.html?" + idcompany;
+    document.location.href="HomePage.html";
 }
 </script>
 

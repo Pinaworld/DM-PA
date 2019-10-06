@@ -278,8 +278,8 @@
   <script src="js/main.js"></script>
   <script type="text/javascript">
 
-     var idCompany = sessionStorage.idC;
-     
+     var idcompany = sessionStorage.idC;
+     console.log(sessionStorage.idC);
       $.ajax({
             type: "GET",
             url: "http://127.0.0.1:8081/advertisement/"+ idcompany,
@@ -332,13 +332,13 @@
         });
 
 function ModifierAdvertisement(id){
-  document.location.href="ModificationAnnonce.html?"+idcompany +"?"+ id;
+  document.location.href="ModificationAnnonce.html?"+ id;
 };
 function AjoutAdvertisement(){
-  document.location.href="RegistrationAnnonce.html?"+idcompany;
+  document.location.href="RegistrationAnnonce.html";
 };
 function ModificationEntreprise(){
-  document.location.href="ModificationEntreprise.html?"+idcompany;
+  document.location.href="ModificationEntreprise.html";
 };
 function Deconnexion(){
   sessionStorage.clear();

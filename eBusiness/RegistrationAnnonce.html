@@ -100,10 +100,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
- var url = window.location.href;
-      var split = url.split("?");
-      var idcompany = split[1];
-      window.history.pushState("object or string", "Title", "RegistrationAnnonce.html");
+    var idcompany = sessionStorage.idC;
+     // window.history.pushState("object or string", "Title", "RegistrationAnnonce.html");
 
 
     // date du jour minimum pour le datepicker
@@ -132,18 +130,18 @@ function EnregistrerAdvertisement(){
     var medium =  document.getElementById("cartonM").value;
     var small =  document.getElementById("cartonS").value;
 
-    if(large.lenght != 0){
+    if(large.lenght <= 0){
         large = "0";
     }
-    if(medium.lenght != 0){
+    if(medium.lenght <= 0){
         medium = "0";
     }
-    if(small.lenght != 0){
+    if(small.lenght <= 0){
         small = "0";
     }
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:8081/advertisement/1",
+        url: "http://127.0.0.1:8081/advertisement/" + idcompany,
         
         data: {
             availabilityDate: availabilityDate,
@@ -154,7 +152,7 @@ function EnregistrerAdvertisement(){
             idCompany: idcompany
         },
         success: function( result){
-            document.location.href="HomePage.html?"+idcompany;
+            document.location.href="HomePage.html";
         },
         error: function (errormessage) {
             alert("problème lors de l'enregistrement de l'annonce");
@@ -162,7 +160,7 @@ function EnregistrerAdvertisement(){
     });
 }
 function Retour(){
-    document.location.href="HomePage.html?" + idcompany;
+    document.location.href="HomePage.html";
 }
 
 

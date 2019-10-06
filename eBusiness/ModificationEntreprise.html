@@ -119,10 +119,8 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-    var url = window.location.href;
-    var split = url.split("?");
-    var idCompany = split[1];
-    window.history.pushState("object or string", "Title", "ModificationEntreprise.html");
+    var idCompany = sessionStorage.idC;
+    //window.history.pushState("object or string", "Title", "ModificationEntreprise.html");
     $.ajax({
           type: "GET",
           url: "http://127.0.0.1:8081/company/" + idCompany ,
@@ -176,7 +174,7 @@ function ModificationEntreprise(){
                         password: mdp
                       },
                     success: function( result){
-                         document.location.href="HomePage.html?" + idcompany;
+                         document.location.href="HomePage.html?" + idCompany;
                     },
                     error: function (errormessage) {
                         alert("il y a eu une erreur lors de la modification de l'entreprise");
@@ -194,10 +192,10 @@ function ModificationEntreprise(){
     }else{
         alert("mots de passe différents ");
     }
-    document.location.href="HomePage.html?" + idcompany;
+    document.location.href="HomePage.html?" + idCompany;
 }
 function Retour(){
-    document.location.href="HomePage.html?" + idcompany;
+    document.location.href="HomePage.html?" + idCompany;
 }
 
 </script>

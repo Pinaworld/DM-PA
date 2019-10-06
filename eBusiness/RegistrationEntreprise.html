@@ -139,7 +139,7 @@
     var mdp =document.getElementById("mdp1").value;
     var mdp2 =document.getElementById("mdp2").value;
 
-    if(mdp == mdp2){
+   if(mdp == mdp2){
         if(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{12,})$/.test(mdp) == true){
             if(nomEntreprise.lenght != 0 && sirenEntreprise.lenght != 0 && city.lenght != 0 && numaddress.lenght != 0 && address.lenght != 0 && zipCode.lenght != 0 && mail.lenght != 0){
                
@@ -162,9 +162,13 @@
 
                             //si data renvoie bien une company : document.location.href="HomePage.html?" + idcompany;
 
-
-
-                            document.location.href="HomePage.html?1"
+                            if (data != undefined){
+                                console.long("problème de traitement, veuillez reessayez");
+                                document.location.href="RegistrationEntreprise.html"
+                            }
+                            else{
+                                document.location.href="HomePage.html";
+                            }
                         },
                         ''
                      );

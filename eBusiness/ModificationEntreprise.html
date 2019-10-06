@@ -118,11 +118,11 @@
     <script src="js/global.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
-    //var CheminComplet = document.location.href;
-    //var NomDuFichier = CheminComplet.substring(CheminComplet.lastIndexOf( "/" )+1 );
-    //if(NomDuFichier != "ModificationEntreprise.html"){
-    //    document.location.href="ModificationEntreprise.html";
-    //}
+    var CheminComplet = document.location.href;
+    var NomDuFichier = CheminComplet.substring(CheminComplet.lastIndexOf( "/" )+1 );
+    if(NomDuFichier != "ModificationEntreprise.html"){
+        document.location.href="ModificationEntreprise.html";
+    }
     var idCompany = sessionStorage.idC;
     //window.history.pushState("object or string", "Title", "ModificationEntreprise.html");
     $.ajax({
@@ -178,13 +178,15 @@ function ModificationEntreprise(){
                         password: mdp
                       },
                     success: function( result){
-                         Retour();
+                        if(result != undefined) {
+                            Retour();
+                        }
                     },
                     error: function (errormessage) {
                         alert("il y a eu une erreur lors de la modification de l'entreprise");
                     },
                     complete: function(result){
-                        Retour();
+                        document.location.href="HomePage.html";
                     }
                 });
             }else{

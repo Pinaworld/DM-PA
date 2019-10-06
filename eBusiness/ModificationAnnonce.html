@@ -143,36 +143,29 @@ function ModificationAdvertisement(){
     var large = document.getElementById("cartonL").value;
     var medium = document.getElementById("cartonM").value;
     var small = document.getElementById("cartonS").value;
-    $.PUT(
-        'http://127.0.0.1:8081/company/', 
-        {
-            name: nomEntreprise,
-            SIREN: sirenEntreprise,
-            city: city,
-            street: address,
-            number: numaddress,
-            zipCode: zipCode,
-            email: mail,
-            password: mdp
+
+    $.ajax({
+          type: "PUT",
+          url: "http://127.0.0.1:8081/advertisement/" + idCompany + "/" +idAvertisement,
+          data: {
+            idAvertisement: idAvertisement,
+            availabilityDate: availabilityDate,
+            description: description,
+            large: large,
+            medium: medium,
+            small: small,
+            idCompany: idCompany
+          },
+        success: function( result){
+            document.location.href="HomePage.html";
         },
-
-        function(data){
-            /* ici il faudrait récupérer les id de l'entreprise pour pouvoir le mettre dans le sessionStorage*/
-
-
-            //si data renvoie bien une company : document.location.href="HomePage.html?" + idcompany;
-
-            if (data != undefined){
-                console.long("problème de traitement, veuillez reessayez");
-                document.location.href="RegistrationEntreprise.html"
-            }
-            else{
-                document.location.href=" à définir.html";
-            }
+        error: function (errormessage) {
+            alert("problème lors de la mise à jour de l'annonce");
         },
-        ''
-     );
-
+        complete: function(result){
+            document.location.href="HomePage.html";
+        }
+    });
 }
 /*
     postFormData('http://127.0.0.1:8081/advertisement/'+ idCompany + '/' +idAvertisement, {idAvertisement: idAvertisement,
@@ -202,28 +195,7 @@ function postFormData(url, data) {
 */
 
 /*
-    $.ajax({
-          type: "PUT",
-          url: "http://127.0.0.1:8081/advertisement/" + idCompany + "/" +idAvertisement,
-          data: {
-            idAvertisement: idAvertisement,
-            availabilityDate: availabilityDate,
-            description: description,
-            large: large,
-            medium: medium,
-            small: small,
-            idCompany: idCompany
-          },
-        success: function( result){
-            document.location.href="HomePage.html";
-        },
-        error: function (errormessage) {
-            alert("problème lors de la mise à jour de l'annonce");
-        },
-        complete: function(result){
-            document.location.href="HomePage.html";
-        }
-    });
+    
 }*/
 
 

@@ -139,25 +139,31 @@ function EnregistrerAdvertisement(){
     if(small.lenght <= 0){
         small = "0";
     }
-    $.ajax({
-        type: "POST",
-        url: "http://127.0.0.1:8081/advertisement/" + idcompany,
-        
-        data: {
-            availabilityDate: availabilityDate,
-            description: description,
-            large: large,
-            medium: medium,
-            small: small,
-            idCompany: idcompany
-        },
-        success: function( result){
-            document.location.href="HomePage.html";
-        },
-        error: function (errormessage) {
-            alert("problème lors de l'enregistrement de l'annonce");
-        }
-    });
+
+
+    $.post(
+            'http://127.0.0.1:8081/advertisement/' + idcompany, 
+            {
+                availabilityDate: availabilityDate,
+                description: description,
+                large: large,
+                medium: medium,
+                small: small,
+                idCompany: idcompany
+            },
+            function(data){
+                //var data = JSON.parse(data);
+                if(data.token != undefined){
+                    console.log(data);
+                    document.location.href="HomePage.html";
+                }
+                else{
+                    $("#test").html("<p>Erreur lors de la connexion...</p>");
+                }
+         
+            },
+            ''
+        )
 }
 function Retour(){
     document.location.href="HomePage.html";

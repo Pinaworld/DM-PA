@@ -154,7 +154,7 @@
                 </div>
                 <!-- layer 2 -->
                 <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                  <h1 class="title2">AHHHHHHHH</h1>
+                  <h1 class="title2">Des cartons partout !</h1>
                 </div>
               </div>
             </div>
@@ -181,10 +181,8 @@
           </div>
         </div>
       </div>
-      <div class="row text-center">
         <div class="services-contents" id="displayAdvertisement">
         </div>
-      </div>
     </div>
     <div class="col-md-4 col-sm-4 col-xs-12">
       <div class="contact-icon text-center">
@@ -287,17 +285,21 @@
             dataType: "json",
             success: function( result){
               $(result).each(function (index, m){
-                    var ligne = $("<div class=\"col-md-4 col-sm-4 col-xs-8\">");
+                    var ligne = $("<div class=\"col-md-4 col-sm-4 col-xs-12\">");
                     ligne.append($("<div class=\"about-move\">"));
                     ligne.append($("<div class= \"services-details\">"));
                     ligne.append($("<div class=\"single-services\">"));
-                    ligne.append($("<a class=\"services-icon\" href=\"#\"> <i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i> </a>"));
+                    ligne.append($("<a class=\"services-icon text-center\" href=\"#services\"> <i class=\"fa fa-map-marker text-center\" aria-hidden=\"true\"></i> </a>"));
                     var date = m.availabilityDate.split("T");
                     ligne.append($("<h4>"+date[0]+"</h4>"));
                     ligne.append($("<p> nombre carton large : " + m.large +"</p>"));
                     ligne.append($("<p>nombre carton medium : " + m.medium +"</p>"));
                     ligne.append($("<p>nombre carton small : " + m.small +"</p>"));
-                    ligne.append($("<button  class=\"btn--blue btn--radius-2\" value=\"Modifier\"  onClick=\"ModifierAdvertisement("+m.idAdvertisement+")\"> Modifier </button>"));
+                    ligne.append($("<button  class=\"btn--blue btn--radius-2 text-center\" value=\"Modifier\"  onClick=\"ModifierAdvertisement("+m.idAdvertisement+")\"> Modifier </button>"));
+                    ligne.append($(" <i>&nbsp;</i>"));
+                    ligne.append($(" <i>&nbsp;</i>"));
+                    ligne.append($(" <i>&nbsp;</i>"));
+                     ligne.append($("<button  class=\"btn--blue btn--radius-2 text-center\" value=\"Modifier\"  onClick=\"SupprimerAdvertisement("+m.idAdvertisement+")\"> Supprimer </button>"));
                     ligne.append($("</div>"));
                     ligne.append($("</div>"));
                     ligne.append($("</div>"));
@@ -330,6 +332,23 @@
               alert("erreur sur le get all advertisements");
             }
         });
+
+
+function SupprimerAdvertisement(id){
+    $.ajax({
+        type: "DELETE",
+        url: "http://127.0.0.1:8081/advertisement/"+ idcompany+"/"+id,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function( result){
+          document.location.href="HomePage.html";
+        },
+          error: function (errormessage) {
+          alert("erreur sur le DELTE all advertisements");
+        }
+    });
+  
+};
 
 function ModifierAdvertisement(id){
   document.location.href="ModificationAnnonce.html?"+ id;

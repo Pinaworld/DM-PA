@@ -48,7 +48,7 @@
                             <div>
                                 <div class="input-group">
                                     <label class="label">Nombre de carton large (taille L)  </label>
-                                    <input class="input--style-4" type="number" name="nb_carton_L" id="cartonL">
+                                    <input class="input--style-4" type="number" name="nb_carton_L" id="cartonL" min="0">
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                             <div>
                                 <div class="input-group">
                                     <label class="label">Nombre de carton médium (taille M)  </label>
-                                    <input class="input--style-4" type="number" name="nb_carton_M" id="cartonM">
+                                    <input class="input--style-4" type="number" name="nb_carton_M" id="cartonM" min="0">
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                             <div>
                                 <div class="input-group">
                                     <label class="label">Nombre de carton small (taille s)  </label>
-                                    <input class="input--style-4" type="number" name="nb_carton_S"  id="cartonS">
+                                    <input class="input--style-4" type="number" name="nb_carton_S"  id="cartonS" min="0">
                                 </div>
                             </div>
                         </div>
@@ -146,6 +146,18 @@ function ModificationAdvertisement(){
     var large = document.getElementById("cartonL").value;
     var medium = document.getElementById("cartonM").value;
     var small = document.getElementById("cartonS").value;
+    if(large.lenght == 0){
+        large = "0";
+    }else{
+        var valLarge = parseInt(large, 10);
+        if (isNaN(valLarge)) { large = 0; }
+    }
+    if(medium.lenght <= 0){
+        medium = "0";
+    }
+    if(small.lenght <= 0){
+        small = "0";
+    }
     $.ajax({
           type: "PUT",
           url: "http://127.0.0.1:8081/advertisement/" + idCompany + "/" +idAvertisement,

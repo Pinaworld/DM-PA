@@ -293,9 +293,9 @@
                     ligne.append($("<a class=\"services-icon text-center\" href=\"#services\"> <i class=\"fa fa-map-marker text-center\" aria-hidden=\"true\"></i> </a>"));
                     var date = m.availabilityDate.split("T");
                     ligne.append($("<h4>"+date[0]+"</h4>"));
-                    ligne.append($("<p> nombre carton large : " + m.large +"</p>"));
-                    ligne.append($("<p>nombre carton medium : " + m.medium +"</p>"));
-                    ligne.append($("<p>nombre carton small : " + m.small +"</p>"));
+                    ligne.append($("<p> nombre cartons larges : " + m.large +"</p>"));
+                    ligne.append($("<p>nombre cartons mediums : " + m.medium +"</p>"));
+                    ligne.append($("<p>nombre cartons smalls : " + m.small +"</p>"));
                     //possible de mettre la description mais limiter le nombre de caractère
                    // ligne.append($("<p>description : " + m.description +"</p>"));
                     ligne.append($("<button  class=\"btn--blue btn--radius-2 text-center\" value=\"Modifier\"  onClick=\"ModifierAdvertisement("+m.idAdvertisement+")\"> Modifier </button>"));

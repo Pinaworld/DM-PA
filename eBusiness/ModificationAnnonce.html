@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" id="submit"> Enregistrer</button> <!-- onclick="logIN()">onclick="ModificationAdvertisement()">Enregistrer</button> -->
+                            <button class="btn btn--radius-2 btn--blue" onclick="ModificationAdvertisement()">Enregistrer</button>
                         </div>
                     </form>
                 </div>
@@ -99,7 +99,10 @@
 
     var idCompany = sessionStorage.idC;
     var urlSplit = document.location.href.split('?');
-    var idAvertisement = urlSplit[1];
+    var idAvertisement1 = urlSplit[1];
+    var idAvertisement = parseInt(idAvertisement1, 10);
+    if (isNaN(idAvertisement)) { document.location.href="HomePage.html"; }
+
     //window.history.pushState("object or string", "Title", "ModificationAnnonce.html");
     $.ajax({
           type: "GET",
@@ -108,7 +111,6 @@
           
           dataType: "json",
         success: function( result){
-            console.log(result);
                 $(result).each(function (index, m){
                     var date = m.availabilityDate.split("T");
                     document.getElementById("datefield").value = date[0];
@@ -138,40 +140,16 @@
     today = yyyy+'-'+mm+'-'+dd;
     document.getElementById("datefield").setAttribute("min", today);
 
-$("#submit").click(function(e){
-        e.preventDefault();
+function ModificationAdvertisement(){
     var availabilityDate = document.getElementById("datefield").value;
     var description = document.getElementById("description").value;
     var large = document.getElementById("cartonL").value;
     var medium = document.getElementById("cartonM").value;
     var small = document.getElementById("cartonS").value;
-
-     $.ajax({
-        type: "PUT",
-        url: "http://127.0.0.1:8081/advertisement/"+ idCompany+"/"+idAvertisement,
-        contentType: "application/json; charset=utf-8",
-        data: {
-            idAvertisement: idAvertisement,
-            availabilityDate: availabilityDate,
-            description: description,
-            large: large,
-            medium: medium,
-            small: small,
-            idCompany: idCompany
-        },
-        success: function(result){
-            
-            console.log(result);
-            document.location.href="HomePage.html";
-        },
-        error: function (errormessage) {
-            alert("erreur sur le DELTE all advertisements");
-        }
-    });
-     /*
     $.ajax({
           type: "PUT",
           url: "http://127.0.0.1:8081/advertisement/" + idCompany + "/" +idAvertisement,
+          
           data: {
             idAvertisement: idAvertisement,
             availabilityDate: availabilityDate,
@@ -182,7 +160,13 @@ $("#submit").click(function(e){
             idCompany: idCompany
           },
         success: function( result){
-            document.location.href="HomePage.html";
+            console.log(result);
+
+            if (result != undefined){
+                document.location.href="HomePage.html";
+                //document.location.href="RegistrationEntreprise.html";
+            }
+            
         },
         error: function (errormessage) {
             alert("problème lors de la mise à jour de l'annonce");
@@ -190,8 +174,9 @@ $("#submit").click(function(e){
         complete: function(result){
             document.location.href="HomePage.html";
         } 
-    });*/
-});
+    });
+   // document.location.href="HomePage.html";
+}
 
 function Retour(){
     document.location.href="HomePage.html";

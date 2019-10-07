@@ -101,9 +101,11 @@
 <script type="text/javascript">
 
     var idcompany = sessionStorage.idC;
-     // window.history.pushState("object or string", "Title", "RegistrationAnnonce.html");
-
-
+    var CheminComplet = document.location.href;
+    var NomDuFichier = CheminComplet.substring(CheminComplet.lastIndexOf( "/" )+1 );
+    if(NomDuFichier != "RegistrationAnnonce.html"){
+        document.location.href="HomePage.html";
+    }
     // date du jour minimum pour le datepicker
     var today = new Date();
     var dd = today.getDate();

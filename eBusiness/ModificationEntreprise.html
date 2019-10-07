@@ -121,10 +121,9 @@
     var CheminComplet = document.location.href;
     var NomDuFichier = CheminComplet.substring(CheminComplet.lastIndexOf( "/" )+1 );
     if(NomDuFichier != "ModificationEntreprise.html"){
-        document.location.href="ModificationEntreprise.html";
+        document.location.href="HomePage.html";
     }
     var idCompany = sessionStorage.idC;
-    //window.history.pushState("object or string", "Title", "ModificationEntreprise.html");
     $.ajax({
           type: "GET",
           url: "http://127.0.0.1:8081/company/" + idCompany ,

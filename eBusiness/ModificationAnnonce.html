@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" onclick="ModificationAdvertisement()">Enregistrer</button>
+                            <button class="btn btn--radius-2 btn--blue" id="submit"> Enregistrer</button> <!-- onclick="logIN()">onclick="ModificationAdvertisement()">Enregistrer</button> -->
                         </div>
                     </form>
                 </div>
@@ -108,6 +108,7 @@
           
           dataType: "json",
         success: function( result){
+            console.log(result);
                 $(result).each(function (index, m){
                     var date = m.availabilityDate.split("T");
                     document.getElementById("datefield").value = date[0];
@@ -137,13 +138,37 @@
     today = yyyy+'-'+mm+'-'+dd;
     document.getElementById("datefield").setAttribute("min", today);
 
-function ModificationAdvertisement(){
+$("#submit").click(function(e){
+        e.preventDefault();
     var availabilityDate = document.getElementById("datefield").value;
     var description = document.getElementById("description").value;
     var large = document.getElementById("cartonL").value;
     var medium = document.getElementById("cartonM").value;
     var small = document.getElementById("cartonS").value;
 
+     $.ajax({
+        type: "PUT",
+        url: "http://127.0.0.1:8081/advertisement/"+ idCompany+"/"+idAvertisement,
+        contentType: "application/json; charset=utf-8",
+        data: {
+            idAvertisement: idAvertisement,
+            availabilityDate: availabilityDate,
+            description: description,
+            large: large,
+            medium: medium,
+            small: small,
+            idCompany: idCompany
+        },
+        success: function(result){
+            
+            console.log(result);
+            document.location.href="HomePage.html";
+        },
+        error: function (errormessage) {
+            alert("erreur sur le DELTE all advertisements");
+        }
+    });
+     /*
     $.ajax({
           type: "PUT",
           url: "http://127.0.0.1:8081/advertisement/" + idCompany + "/" +idAvertisement,
@@ -165,39 +190,8 @@ function ModificationAdvertisement(){
         complete: function(result){
             document.location.href="HomePage.html";
         } 
-    });
-}
-/*
-    postFormData('http://127.0.0.1:8081/advertisement/'+ idCompany + '/' +idAvertisement, {idAvertisement: idAvertisement,
-            availabilityDate: availabilityDate,
-            description: description,
-            large: large,
-            medium: medium,
-            small: small,
-            idCompany: idCompany})
-    .then(data => console.error(error))
-    .catch(error => console.error(error));
-
-
-
-    document.location.href="HomePage.html";
-}
-function postFormData(url, data) {
-  return fetch(url, {
-    method: 'PUT', // 'GET', 'PUT', 'DELETE', etc.
-    body: new URLSearchParams(data),
-    headers: new Headers({
-      'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
-    })
-  })
-  .then(response => response.json())
-}
-*/
-
-/*
-    
-}*/
-
+    });*/
+});
 
 function Retour(){
     document.location.href="HomePage.html";

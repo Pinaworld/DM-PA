@@ -55,7 +55,7 @@
 							</button>
 						</div>
 					</div>
-					<div><p id="test"></p></div>
+					<div><p id="erreurCo"></p></div>
 					<div class="text-center p-t-115">
 						<span class="txt1">
 							Vous n'avez pas encore de Compte ?
@@ -102,19 +102,21 @@ $(document).ready(function(){
                 password : mdp
             },
             function(data){
- 				//var data = JSON.parse(data);
                 if(data.token != undefined){
                     if(sessionStorage.token != undefined){
                         sessionStorage.setItem('token', data.token);
-                    }elses{
+                    }else{
                         sessionStorage.token = data.token;
                     }
-
+                    if(sessionStorage.idC != undefined){
+                        sessionStorage.setItem('idC', data.company.idCompany);
+                    }else{
+                        sessionStorage.idC = data.company.idCompany;
+                    }
             		document.location.href="HomePage.html";
                 }
-                
                 else{
-                    $("#test").html("<p>Erreur lors de la connexion...</p>");
+                    $("#erreurCo").html("<p></p><p>Erreur lors de la connexion...</p>");
                 }
          
             },

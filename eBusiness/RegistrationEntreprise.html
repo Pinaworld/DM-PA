@@ -61,7 +61,7 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Numéro de rue</label>
-                                    <input class="input--style-4" type="Number" name="ville" id="numaddress">
+                                    <input class="input--style-4" type="Number" name="ville" id="numaddress" min="1">
                                 </div>
                             </div>
                             <div class="col-2">
@@ -75,7 +75,7 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Code postal</label>
-                                    <input class="input--style-4" type="number" max="95880" name="zipcode" id="zipCode">
+                                    <input class="input--style-4" type="number" max="95880" name="zipcode" id="zipCode" min="0" max="99999">
                                 </div>
                             </div>
                             <div class="col-2">
@@ -139,38 +139,68 @@
     var mdp =document.getElementById("mdp1").value;
     var mdp2 =document.getElementById("mdp2").value;
 
+    var valSiren = parseInt(sirenEntreprise, 10);
+    var stringSiren = String(valSiren);
+    console.log(stringSiren.lenght);
+    var valnumadress = parseInt(numaddress, 10);
+    var valZipcode = parseInt(zipCode, 10);
+
+    if( isNaN(valnumadress) || valnumadress <= 0){
+        numaddress = 1;
+    }
+
+    
    if(mdp == mdp2){
         if(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{12,})$/.test(mdp) == true){
-            if(nomEntreprise.lenght != 0 && sirenEntreprise.lenght != 0 && city.lenght != 0 && numaddress.lenght != 0 && address.lenght != 0 && zipCode.lenght != 0 && mail.lenght != 0){
-               
-                    $.post(
-                        'http://127.0.0.1:8081/company/', 
-                        {
-                            name: nomEntreprise,
-                            SIREN: sirenEntreprise,
-                            city: city,
-                            street: address,
-                            number: numaddress,
-                            zipCode: zipCode,
-                            email: mail,
-                            password: mdp
-                        },
-             
-                        function(data){
-                            /* ici il faudrait récupérer les id de l'entreprise pour pouvoir le mettre dans le sessionStorage*/
-
-
-                            //si data renvoie bien une company : document.location.href="HomePage.html?" + idcompany;
-
-                            if (data != undefined){
-                                document.location.href="HomePage.html"
-                            }
-                            else{
-                                document.location.href="RegistrationEntreprise.html";
-                            }
-                        },
-                        ''
-                     );
+            if(nomEntreprise.lenght != 0 && city.lenght != 0 && numaddress.lenght != 0 && address.lenght != 0 && zipCode.lenght != 0 && mail.lenght != 0){
+                //if (valSiren <= -1 ){ //&& .lenght != 9
+                    if(valZipcode>=0 && valZipcode <= 99999  ){//&& zipCode.lenght != 0){
+                        $.post(
+                            'http://127.0.0.1:8081/company/',
+                            {
+                                name: nomEntreprise,
+                                SIREN: sirenEntreprise,
+                                city: city,
+                                street: address,
+                                number: numaddress,
+                                zipCode: zipCode,
+                                email: mail,
+                                password: mdp
+                            },
+                 
+                            function(data){
+                                sessionStorage.setItem('idC', data.idCompany); 
+                                console.log(sessionStorage.idC);
+                                 $.post(
+                                    'http://127.0.0.1:8081/company/login', 
+                                    {
+                                        email : mail,
+                                        password : mdp
+                                    },
+                                    function(data){
+                                        if(data.token != undefined){
+                                            sessionStorage.setItem('token', data.token);
+                                            document.location.href="HomePage.html";
+                                        }
+                                        else{
+                                            document.location.href="index.html";
+                                        }
+                                 
+                                    },
+                                    ''
+                                )
+                            },
+                            ''
+                         );
+                    }else{
+                        alert("Code postal non valide");
+                    }
+                    
+                //}else{
+                   // console.log(valSiren);
+                   // console.log(sirenEntreprise.lenght);
+                    //alert("Le numéro de SIREN doit comprendre 9 chiffres");
+                //}
             }else{
                 alert("Tout doit être renseigné !");
             }

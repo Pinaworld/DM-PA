@@ -43,8 +43,8 @@
 
 					<div class="wrap-input100 validate-input" data-validate="Entrez un mot de passe">
 						
-						<input class="input100" type="password" name="pass" id="mdp">
-						<span class="focus-input100" data-placeholder=""></span>
+						<input class="input100" type="password" name="pass" id="mdp" data-placeholder="mot de passe">
+						<span class="focus-input100" ></span>
 					</div>
 
 					<div class="container-login100-form-btn">
@@ -90,7 +90,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
- 
     $("#submit").click(function(e){
         e.preventDefault();
  		var id = 1;
@@ -105,12 +104,15 @@ $(document).ready(function(){
             function(data){
  				//var data = JSON.parse(data);
                 if(data.token != undefined){
-                	sessionStorage.setItem('token', data.token);
-                    console.log(sessionStorage.token);
-                    sessionStorage.setItem('idC', 1);
-                    console.log(sessionStorage.idC);
+                    if(sessionStorage.token != undefined){
+                        sessionStorage.setItem('token', data.token);
+                    }elses{
+                        sessionStorage.token = data.token;
+                    }
+
             		document.location.href="HomePage.html";
                 }
+                
                 else{
                     $("#test").html("<p>Erreur lors de la connexion...</p>");
                 }

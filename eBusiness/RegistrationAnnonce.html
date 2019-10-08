@@ -132,17 +132,25 @@ function EnregistrerAdvertisement(){
     var medium =  document.getElementById("cartonM").value;
     var small =  document.getElementById("cartonS").value;
 
-    if(large.lenght <= 0){
+    if(large.lenght == 0){
         large = "0";
+    }else{
+        var valLarge = parseInt(large, 10);
+        if (isNaN(valLarge) || valLarge <= 0) { large = 0; }
     }
     if(medium.lenght <= 0){
         medium = "0";
+    }else{
+        var valMedium = parseInt(medium, 10);
+        if (isNaN(valLarge) || valLarge <= 0) { large = 0; }
     }
     if(small.lenght <= 0){
         small = "0";
+    }else{
+        var valSmall = parseInt(small, 10);
+        if (isNaN(valLarge) || valLarge <= 0) { large = 0; }
     }
-
-
+    
     $.post(
             'http://127.0.0.1:8081/advertisement/' + idcompany, 
             {

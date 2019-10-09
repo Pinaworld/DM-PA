@@ -131,6 +131,7 @@
     if(NomDuFichier != "ModificationEntreprise.html"){
         document.location.href="HomePage.html";
     }
+    var ancienPass ="";
     var idCompany = sessionStorage.idC;
     $.ajax({
           type: "GET",
@@ -148,6 +149,8 @@
                 document.getElementById("mail").value = m.email;
                 document.getElementById("mdp").value = m.password;
                 document.getElementById("mdp2").value = m.password;
+                ancienPass =  m.password;
+                console.log(ancienPass);
                 });
             },
         error: function (errormessage) {
@@ -158,11 +161,36 @@
 function Verifmdp(){
     var mdp =document.getElementById("mdp").value;
     var mdp2 =document.getElementById("mdp2").value;
-
    if(mdp == mdp2 ){
         if(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{12,})$/.test(mdp) == true){
-            document.getElementById("Save").disabled = false;
-        return true;
+            if(ancienPass != mdp){
+                $.ajax({
+                      type: "GET",
+                      url: "http://127.0.0.1:8081/passwordHistory/company/" + idCompany ,
+                      contentType: "application/json; charset=utf-8",
+                      dataType: "json",
+                    success: function(result){
+                         $(result).each(function (index, m){
+                                    if(m.oldPassword == mdp){
+
+                                        alert("Un de vos mot de passe est identique au nouveau que vous venez de mettre");
+                                        document.getElementById("Save").disabled = true;
+                                        return false;
+                                    }
+                                    console.log(m.oldPassword);
+                                });
+                         document.getElementById("Save").disabled = false;
+                            },
+                    error: function (errormessage) {
+                        alert("problème sur le get");
+                    }
+                });
+
+            }else{
+                alert("les mots de passes sont identiques à votre ancien mot de passe");
+                document.getElementById("Save").disabled = true;
+                return false;
+            }
         }else{
             alert("les mots de passes ne remplissent pas les conditions de sécurités : il faut au moins 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère spécial et une taille au dessus de 12");
             document.getElementById("Save").disabled = true;

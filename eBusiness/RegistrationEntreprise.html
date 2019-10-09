@@ -39,13 +39,13 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Nom de l'entreprise</label>
-                                    <input class="input--style-4" type="text" name="name" id="nameEntreprise">
+                                    <input class="input--style-4" type="text" name="name" id="nameEntreprise" onblur="VerifName()">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Siren</label>
-                                    <input class="input--style-4" type="Number" name="siren" id="sirenEntreprise">
+                                    <input class="input--style-4" type="Number" name="siren" id="sirenEntreprise" onblur="VerifSiren()">
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Ville</label>
-                                    <input class="input--style-4" type="text" name="ville" id="city">
+                                    <input class="input--style-4" type="text" name="ville" id="city" onblur="VerifCity()">
                                 </div>
                             </div>
                         </div>
@@ -61,13 +61,13 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Numéro de rue</label>
-                                    <input class="input--style-4" type="Number" name="ville" id="numaddress" min="1">
+                                    <input class="input--style-4" type="Number" name="ville" id="numaddress" min="1" onblur="VerifNumAddress()">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Adresse</label>
-                                    <input class="input--style-4" type="text" name="location" id="address">
+                                    <input class="input--style-4" type="text" name="location" id="address" onblur="VerifAddress()"> 
                                 </div>
                             </div>
                         </div>
@@ -75,13 +75,13 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Code postal</label>
-                                    <input class="input--style-4" type="number" max="95880" name="zipcode" id="zipCode" min="0" max="99999">
+                                    <input class="input--style-4" type="number" max="95880" name="zipcode" id="zipCode" min="0" max="99999" onblur="VerifZip()">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="email" id="mail">
+                                    <input class="input--style-4" type="email" name="email" id="mail" onblur="VerifMail()">
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" id="submit">Enregistrer</button>
+                            <button class="btn btn--radius-2 btn--blue" id="submit" >Enregistrer</button>
                         </div>
                     </form>
                 </div>
@@ -124,8 +124,107 @@
     <script src="js/global.js"></script>
 <script type="text/javascript">
 
-//function RegistrationEntreprise(){
 
+function VerifSiren(){
+    var sirenEntreprise =document.getElementById("sirenEntreprise").value;
+    sirenEntreprise.toString();
+
+    if(sirenEntreprise.length == 9 ){
+        document.getElementById("submit").disabled = false;
+        return true;
+    }else{
+        alert("le numéro de siren doit comprendre 9 chiffres");
+        document.getElementById("submit").disabled = true;
+        return false;
+    }
+}
+
+function VerifName(){
+    var nomEntreprise = document.getElementById("nameEntreprise").value;
+    nomEntreprise.toString();
+
+    if(nomEntreprise.length > 0 ){
+        document.getElementById("submit").disabled = false;
+        return true;
+    }else{
+        alert("Le nom de l'entreprise doit être renseigné");
+        document.getElementById("submit").disabled = true;
+        return false;
+    }
+}
+function VerifZip(){
+    var zipCode =document.getElementById("zipCode").value;
+    zipCode.toString();
+
+    if(zipCode.length == 5 ){
+        document.getElementById("submit").disabled = false;
+        return true;
+    }else{
+        alert("Le code postal doit comprendre 5 chiffres");
+        document.getElementById("submit").disabled = true;
+        return false;
+    }
+}
+function VerifAddress(){
+    var address =document.getElementById("address").value ;
+    address.toString();
+
+    if(address.length > 0 ){
+        document.getElementById("submit").disabled = false;
+        return true;
+    }else{
+        alert("L'adresse doit être renseignée");
+        document.getElementById("submit").disabled = true;
+        return false;
+    }
+}
+function VerifNumAddress(){
+    var numaddress =document.getElementById("numaddress").value;
+    var valnum = parseInt(numaddress, 10);
+
+    if (isNaN(valnum)) {
+        alert("Le numéro d'adresse ne peut contenir autre chose que des chiffres");
+        document.getElementById("submit").disabled = true;
+        return false; 
+    }else {
+        if(valnum > 0 ){
+            document.getElementById("submit").disabled = false;
+            return true;
+        }else{
+            alert("Le numéro d'adresse doit être au dessus de 0");
+            document.getElementById("submit").disabled = true;
+            return false;
+        }
+    }
+}
+function VerifCity(){
+    var city = document.getElementById("city").value;
+    city.toString();
+
+    if(city.length > 0 ){
+        document.getElementById("submit").disabled = false;
+        return true;
+    }else{
+        alert("La ville doit être renseignée");
+        document.getElementById("submit").disabled = true;
+        return false;
+    }
+}
+function VerifMail(){
+    var mail =document.getElementById("mail").value;
+    mail.toString();
+
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
+    if(re.test(String(mail).toLowerCase()) == true ){
+        document.getElementById("submit").disabled = false;
+        return true;
+    }else{
+        alert("L'adresse mail n'est pas valide");
+        document.getElementById("submit").disabled = true;
+        return false;
+    }
+}
  $("#submit").click(function(e){
     e.preventDefault();
 
@@ -139,71 +238,43 @@
     var mdp =document.getElementById("mdp1").value;
     var mdp2 =document.getElementById("mdp2").value;
 
-    var valSiren = parseInt(sirenEntreprise, 10);
-    var stringSiren = String(valSiren);
-    console.log(stringSiren.lenght);
-    var valnumadress = parseInt(numaddress, 10);
-    var valZipcode = parseInt(zipCode, 10);
-
-    if( isNaN(valnumadress) || valnumadress <= 0){
-        numaddress = 1;
-    }
-
-    
    if(mdp == mdp2){
         if(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{12,})$/.test(mdp) == true){
-            if(nomEntreprise.lenght != 0 && city.lenght != 0 && numaddress.lenght != 0 && address.lenght != 0 && zipCode.lenght != 0 && mail.lenght != 0){
-                //if (valSiren <= -1 ){ //&& .lenght != 9
-                    if(valZipcode>=0 && valZipcode <= 99999  ){//&& zipCode.lenght != 0){
-                        $.post(
-                            'http://127.0.0.1:8081/company/',
-                            {
-                                name: nomEntreprise,
-                                SIREN: sirenEntreprise,
-                                city: city,
-                                street: address,
-                                number: numaddress,
-                                zipCode: zipCode,
-                                email: mail,
-                                password: mdp
-                            },
-                 
-                            function(data){
-                                sessionStorage.setItem('idC', data.idCompany); 
-                                console.log(sessionStorage.idC);
-                                 $.post(
-                                    'http://127.0.0.1:8081/company/login', 
-                                    {
-                                        email : mail,
-                                        password : mdp
-                                    },
-                                    function(data){
-                                        if(data.token != undefined){
-                                            sessionStorage.setItem('token', data.token);
-                                            document.location.href="HomePage.html";
-                                        }
-                                        else{
-                                            document.location.href="index.html";
-                                        }
-                                 
-                                    },
-                                    ''
-                                )
-                            },
-                            ''
-                         );
-                    }else{
-                        alert("Code postal non valide");
-                    }
-                    
-                //}else{
-                   // console.log(valSiren);
-                   // console.log(sirenEntreprise.lenght);
-                    //alert("Le numéro de SIREN doit comprendre 9 chiffres");
-                //}
-            }else{
-                alert("Tout doit être renseigné !");
-            }
+            $.post(
+                'http://127.0.0.1:8081/company/',
+                {
+                    name: nomEntreprise,
+                    SIREN: sirenEntreprise,
+                    city: city,
+                    street: address,
+                    number: numaddress,
+                    zipCode: zipCode,
+                    email: mail,
+                    password: mdp
+                },
+                function(data){
+                    sessionStorage.setItem('idC', data.idCompany); 
+                    console.log(sessionStorage.idC);
+                     $.post(
+                        'http://127.0.0.1:8081/company/login', 
+                        {
+                            email : mail,
+                            password : mdp
+                        },
+                        function(data){
+                            if(data.token != undefined){
+                                sessionStorage.setItem('token', data.token);
+                                document.location.href="HomePage.html";
+                            }
+                            else{
+                                document.location.href="index.html";
+                            }
+                        },
+                        ''
+                    )
+                },
+                ''
+             );       
         }else{
             alert("les mots de passes ne remplissent pas les conditions de sécurités : il faut au moins 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère spécial et une taille au dessus de 12");
         }

@@ -85,20 +85,20 @@
                             <div class="col-2">
                                 <div class="input-group validate-input">
                                   <label class="label">Mot de passe</label>
-                                    <input class="input--style-4  input100" type="password" name="mot de passe" id="mdp"  onblur="Verif()">
+                                    <input class="input--style-4  input100" type="password" name="mot de passe" id="mdp"  onblur="Verifmdp()">
                                     <span class="focus-input100" data-placeholder="Mot de passe"></span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group validate-input">
                                   <label class="label">Confirmez votre mot de passe</label>
-                                    <input class="input--style-4  input100" type="password" name="pass" id="mdp2"  onblur="Verif()">
+                                    <input class="input--style-4  input100" type="password" name="pass" id="mdp2"  onblur="Verifmdp()">
                                     <span class="focus-input100" data-placeholder="Mot de passe"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" id="Save" onclick="Verifmdp()">Enregistrer</button>
+                            <button class="btn btn--radius-2 btn--blue" id="Save" onclick="ModificationEntreprise()">Enregistrer</button>
                         </div>
                     </form>
                 </div>
@@ -115,6 +115,7 @@
     <!-- Main JS-->
     <script src="js/global.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        
 <script type="text/javascript">
     var CheminComplet = document.location.href;
     var NomDuFichier = CheminComplet.substring(CheminComplet.lastIndexOf( "/" )+1 );
@@ -128,7 +129,7 @@
           contentType: "application/json; charset=utf-8",
           dataType: "json",
         success: function(result){
-		 $(result).each(function (index, m){
+         $(result).each(function (index, m){
                 document.getElementById("nameEntreprise").value = m.name;
                 document.getElementById("sirenEntreprise").value = m.SIREN;
                 document.getElementById("city").value = m.city;
@@ -138,7 +139,7 @@
                 document.getElementById("mail").value = m.email;
                 document.getElementById("mdp").value = m.password;
                 document.getElementById("mdp2").value = m.password;
-				});
+                });
             },
         error: function (errormessage) {
             alert("problème sur le get");
@@ -169,7 +170,7 @@ function VerifSiren(){
     var sirenEntreprise =document.getElementById("sirenEntreprise").value;
     sirenEntreprise.toString();
 
-    if(sirenEntreprise.lengt == 9 ){
+    if(sirenEntreprise.length == 9 ){
         document.getElementById("Save").disabled = false;
         return true;
     }else{
@@ -183,7 +184,7 @@ function VerifName(){
     var nomEntreprise = document.getElementById("nameEntreprise").value;
     nomEntreprise.toString();
 
-    if(nomEntreprise.lengt > 0 ){
+    if(nomEntreprise.length > 0 ){
         document.getElementById("Save").disabled = false;
         return true;
     }else{
@@ -196,7 +197,7 @@ function VerifZip(){
     var zipCode =document.getElementById("zipCode").value;
     zipCode.toString();
 
-    if(zipCode.lengt == 5 ){
+    if(zipCode.length == 5 ){
         document.getElementById("Save").disabled = false;
         return true;
     }else{
@@ -209,7 +210,7 @@ function VerifAddress(){
     var address =document.getElementById("address").value ;
     address.toString();
 
-    if(address.lengt > 0 ){
+    if(address.length > 0 ){
         document.getElementById("Save").disabled = false;
         return true;
     }else{
@@ -241,7 +242,7 @@ function VerifCity(){
     var city = document.getElementById("city").value;
     city.toString();
 
-    if(city.lengt > 0 ){
+    if(city.length > 0 ){
         document.getElementById("Save").disabled = false;
         return true;
     }else{
@@ -251,17 +252,23 @@ function VerifCity(){
     }
 }
 function VerifMail(){
-    var city = document.getElementById("city").value;
-    city.toString();
+    var mail =document.getElementById("mail").value;
+    mail.toString();
 
-    if(city.lengt > 0 ){
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
+    if(re.test(String(mail).toLowerCase()) == true ){
         document.getElementById("Save").disabled = false;
         return true;
     }else{
-        alert("La ville doit être renseignée");
+        alert("L'adresse mail n'est pas valide");
         document.getElementById("Save").disabled = true;
         return false;
     }
+}
+
+function Retour(){
+    document.location.href="HomePage.html";
 }
 
 function ModificationEntreprise(){
@@ -275,20 +282,7 @@ function ModificationEntreprise(){
      var mail =document.getElementById("mail").value;
      var mdp =document.getElementById("mdp").value;
      var mdp2 =document.getElementById("mdp2").value;
-
-            if(nomEntreprise != "" && sirenEntreprise != "" && city != "" && numaddress != 0 && address != "" && zipCode != 0 && mail != ""){
-                    appelAjax(nomEntreprise, sirenEntreprise, city, numaddress, address, zipCode, mail, mdp);
-            }else{
-                alert("Tout doit être renseigné !");
-            }
-        
-}
-
-function Retour(){
-    document.location.href="HomePage.html";
-}
-
-function AppelAjax(nomEntreprise, sirenEntreprise, city, numaddress, address, zipCode, mail, mdp){
+      
     $.ajax({
           type: "PUT",
           url: "http://127.0.0.1:8081/company/" + idCompany,
@@ -313,10 +307,8 @@ function AppelAjax(nomEntreprise, sirenEntreprise, city, numaddress, address, zi
         complete: function(result){
             document.location.href="HomePage.html";
         }
-    });
+    });      
+        
 }
 </script>
-  
-
-
 </body>

@@ -7,6 +7,19 @@
   <meta content="" name="keywords">
   <meta content="" name="description">
 
+
+   <script type="text/javascript">
+    var idcompany = sessionStorage.idC;
+    var token = sessionStorage.token;
+
+    if(idcompany == undefined || token == undefined){
+      document.location.href="index.html";
+    }
+   </script>
+
+
+
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
 
@@ -278,8 +291,6 @@
   <script type="text/javascript">
 
      var idcompany = sessionStorage.idC;
-     console.log(sessionStorage.idC);
-     console.log(sessionStorage.token);
       $.ajax({
             type: "GET",
             url: "http://127.0.0.1:8081/advertisement/"+ idcompany,

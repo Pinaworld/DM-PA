@@ -7,6 +7,15 @@
     <meta name="author" content="Colorlib">
     <meta name="keywords" content="Colorlib Templates">
 
+   <script type="text/javascript">
+    var idcompany = sessionStorage.idC;
+    var token = sessionStorage.token;
+
+    if(idcompany == undefined || token == undefined){
+      document.location.href="index.html";
+    }
+   </script>
+
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">

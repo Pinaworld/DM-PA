@@ -9,6 +9,14 @@
 
     <!-- Title Page-->
     <title>Enregistrement Anonnce</title>
+   <script type="text/javascript">
+    var idcompany = sessionStorage.idC;
+    var token = sessionStorage.token;
+
+    if(idcompany == undefined || token == undefined){
+      document.location.href="index.html";
+    }
+   </script>
 
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -121,9 +129,9 @@
     today = yyyy+'-'+mm+'-'+dd;
     document.getElementById("datefield").setAttribute("min", today);
     document.getElementById("datefield").setAttribute("value", today);
-    document.getElementById("cartonS").setAttribute("value", "0");
-    document.getElementById("cartonM").setAttribute("value", "0");
-    document.getElementById("cartonL").setAttribute("value", "0");
+    document.getElementById("cartonS").setAttribute("value", "");
+    document.getElementById("cartonM").setAttribute("value", "");
+    document.getElementById("cartonL").setAttribute("value", "");
 
 function EnregistrerAdvertisement(){
     var availabilityDate =  document.getElementById("datefield").value;
@@ -150,7 +158,7 @@ function EnregistrerAdvertisement(){
         var valSmall = parseInt(small, 10);
         if (isNaN(valLarge) || valLarge <= 0) { large = 0; }
     }
-    
+
     $.post(
             'http://127.0.0.1:8081/advertisement/' + idcompany, 
             {

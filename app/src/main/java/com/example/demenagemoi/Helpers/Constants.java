@@ -1,8 +1,12 @@
-package com.example.demenagemoi.Helpers;
+package com.example.demenagemoi.helpers;
 
 public class Constants {
 
     public class User {
+
+        private User() {
+
+        }
 
         //MODEL FIELDS
         public static final String FIRST_NAME = "firstName";
@@ -10,7 +14,7 @@ public class Constants {
         public static final String ZIP_CODE = "zipCode";
         public static final String CITY = "city";
         public static final String EMAIL = "email";
-        public static final String PASSWORD = "password";
+        public static final String USER_PASS = "password";
 
         //ROUTES
         public static final String BASE_USER = "user/";
@@ -22,6 +26,10 @@ public class Constants {
     }
 
     public class Removal {
+
+        private Removal(){
+
+        }
 
         //MODEL FIELDS
         public static final String DATE = "date";
@@ -40,7 +48,11 @@ public class Constants {
 
     public class Company {
 
+        private Company(){
+
+        }
         //MODEL FIELDS
+        public static final String ID = "ID_COMPANY";
         public static final String NAME = "NAME";
         public static final String SIREN = "SIREN";
         public static final String CITY = "city";
@@ -48,7 +60,7 @@ public class Constants {
         public static final String NUMBER = "number";
         public static final String ZIPCODE = "zipCode";
         public static final String EMAIL = "email";
-        public static final String PASSWORD = "password";
+        public static final String COMPANY_PASS = "password";
 
         //ROUTES
         public static final String BASE_COMPANY = "company/";
@@ -60,6 +72,10 @@ public class Constants {
     }
 
     public class Advertisement {
+
+        private Advertisement(){
+
+        }
 
         //MODEL FIELDS
         public static final String AVAILABILITY_DATE = "availabilityDate";

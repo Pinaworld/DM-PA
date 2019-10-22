@@ -1,4 +1,4 @@
-package com.example.demenagemoi.Helpers;
+package com.example.demenagemoi.helpers;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -12,6 +12,10 @@ import java.util.Properties;
 
 public final class Config {
     private static final String TAG = "Config";
+
+    private Config() {
+
+    }
 
     public static String getConfigValue(Context context, String name) {
         Resources resources = context.getResources();

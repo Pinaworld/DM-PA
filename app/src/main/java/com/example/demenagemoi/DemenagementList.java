@@ -10,8 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.demenagemoi.Helpers.Constants;
-import com.example.demenagemoi.Helpers.Utils;
+import com.example.demenagemoi.helpers.Constants;
+import com.example.demenagemoi.helpers.Utils;
 import com.example.demenagemoi.model.Removal;
 
 import org.json.JSONArray;
@@ -30,8 +30,11 @@ public class DemenagementList extends AppCompatActivity implements RemovalRecycl
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         if (Utils.isAuthenticated()) {
-            super.onCreate(savedInstanceState);
+            if (!Utils.isTokenValid()) {
+                Utils.refreshToken(DemenagementList.this);
+            }
             setContentView(R.layout.activity_demenagement_list);
             HashMap<String, Object> params = new HashMap<>();
             params.put("route", Constants.Removal.GET_ALL);
@@ -52,38 +55,36 @@ public class DemenagementList extends AppCompatActivity implements RemovalRecycl
                         if (code != 200) {
                             Toast.makeText(DemenagementList.this, "Erreur lors de la récupération des déménagements", Toast.LENGTH_SHORT).show();
                         } else {
-
                             Response response = requestManager.get();
                             String jsonData = response.body().string();
                             JSONArray jsonArray = new JSONArray(jsonData);
                             ArrayList<Removal> removals = new ArrayList<>(Removal.fillList(jsonArray));
 
-                            RecyclerView recyclerView = findViewById(R.id.removalList);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(DemenagementList.this));
-                            removalRecyclerViewAdapter = new RemovalRecyclerViewAdapter(DemenagementList.this, removals);
-                            removalRecyclerViewAdapter.setClickListener(DemenagementList.this);
-                            recyclerView.setAdapter(removalRecyclerViewAdapter);
+                            if (!removals.isEmpty()) {
+                                RecyclerView recyclerView = findViewById(R.id.removalList);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(DemenagementList.this));
+                                removalRecyclerViewAdapter = new RemovalRecyclerViewAdapter(DemenagementList.this, removals);
+                                removalRecyclerViewAdapter.setClickListener(DemenagementList.this);
+                                recyclerView.setAdapter(removalRecyclerViewAdapter);
+                            } else {
+                                Toast.makeText(DemenagementList.this, "Pas de déménagement trouvé", Toast.LENGTH_SHORT).show();
+
+                            }
 
                         }
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
+                    } catch (ExecutionException | InterruptedException | IOException | JSONException e) {
                         e.printStackTrace();
                     }
                 }
-            }, 500);
+            }, 2500);
 
         }
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + removalRecyclerViewAdapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
 
+        Toast.makeText(this, "Vous participez à ce déménagement", Toast.LENGTH_SHORT).show();
     }
 
     public void BackHomeActivity(View view) {

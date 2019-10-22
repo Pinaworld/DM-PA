@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.demenagemoi.Helpers.Constants;
-import com.example.demenagemoi.Helpers.Utils;
+import com.auth0.android.jwt.JWT;
+import com.example.demenagemoi.helpers.Constants;
+import com.example.demenagemoi.helpers.Utils;
+import com.example.demenagemoi.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,7 +55,7 @@ public class SignIn extends AppCompatActivity {
 
             HashMap<String, String> content = new HashMap<>();
             content.put(Constants.User.EMAIL, email);
-            content.put(Constants.User.PASSWORD, password);
+            content.put(Constants.User.USER_PASS, password);
 
             HashMap<String, Object> params = new HashMap<>();
             JSONObject body = Utils.jsonify(content);
@@ -63,48 +65,45 @@ public class SignIn extends AppCompatActivity {
             params.put("method", "POST");
 
             final AsyncTask<HashMap<String, Object>, Void, Response> requestManager = new RequestManager().execute(params);
-            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
 
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     try {
+                        while (requestManager.get() == null) {
+                            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                        }
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         Response response = requestManager.get();
 
-                        if (response.code() != 200) {
-                            Toast.makeText(SignIn.this, "Erreur lors de la connexion", Toast.LENGTH_SHORT).show();
-                        } else {
+                        if (response.code() == 202) {
                             Toast.makeText(SignIn.this, "Connexion en tant que " + email, Toast.LENGTH_SHORT).show();
 
-                            String userInString = response.body().string();
-                            JSONObject userInJson = new JSONObject(userInString);
-                            String idUser = userInJson.getString("idUser");
-                            AuthentifiedUserID authentifiedUserID = AuthentifiedUserID.getInstance();
-                            authentifiedUserID.setID(idUser);
+                            String responseBody = response.body().string();
+                            JSONObject jsonObject = new JSONObject(responseBody);
+                            String tokenString = jsonObject.getString("token");
+                            JSONObject userObject = jsonObject.getJSONObject("user");
+                            User user = new User();
+                            user = user.fill(userObject);
+                            JWT jwt = new JWT(tokenString);
+                            AuthentifiedUser authentifiedUser = AuthentifiedUser.getInstance();
+                            authentifiedUser.setToken(jwt);
+                            authentifiedUser.setUser(user);
 
                             Intent intent = new Intent(SignIn.this, Home.class);
                             startActivity(intent);
+                        } else {
+                            Toast.makeText(SignIn.this, "Erreur lors de la connexion", Toast.LENGTH_SHORT).show();
                         }
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
+                    } catch (ExecutionException | InterruptedException | IOException | JSONException e) {
                         e.printStackTrace();
                     }
                 }
-            }, 500);
+            }, 1500);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
     }
 }

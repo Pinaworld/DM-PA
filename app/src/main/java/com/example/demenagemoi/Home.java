@@ -6,25 +6,38 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.demenagemoi.Helpers.Utils;
+import com.example.demenagemoi.helpers.Utils;
 
 public class Home extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Utils.isAuthenticated()) {
+            if (!Utils.isTokenValid()) {
+                Utils.refreshToken(Home.this);
+            }
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_home);
+        }
+        else {
+            Toast.makeText(this, "Vous n'êtes pas authentifié", Toast.LENGTH_SHORT).show();
+            DeconnectionActivity(null);
         }
     }
 
     public void DeconnectionActivity(View view) {
-        AuthentifiedUserID authentifiedUserID = AuthentifiedUserID.getInstance();
-        authentifiedUserID.setID(null);
+
+        Intent intent = new Intent(this, SignIn.class);
+        AuthentifiedUser authentifiedUser = AuthentifiedUser.getInstance();
+
+        intent.putExtra("email", authentifiedUser.getUser().getEmail());
+        intent.putExtra("password", authentifiedUser.getUser().getPassword());
+
+        authentifiedUser.setUser(null);
+        authentifiedUser.setToken(null);
 
         Toast.makeText(this, "Déconnexion effectuée !", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(this, SignIn.class);
         startActivity(intent);
     }
 
@@ -50,6 +63,6 @@ public class Home extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        //NOT USED
     }
 }

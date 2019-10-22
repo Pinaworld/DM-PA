@@ -1,0 +1,18 @@
+
+`squid:UselessImportCheck"0Remove this unused import 'org.json.JSONObject'.(œÖ´üşÿÿÿÿ8èûŠáÛ-
+`squid:UselessImportCheck"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8û‹áÛ-
+bsquid:UselessImportCheck"2Remove this unused import 'android.widget.Button'.(²òıÿÿÿÿ8èûŠáÛ-
+nsquid:UselessImportCheck	"CRemove this unused import 'android.support.v7.widget.RecyclerView'.(ÊŠáó8û‹áÛ-
+Zsquid:UselessImportCheck"/Remove this unused import 'android.os.Handler'.(ûÛ’¡8èûŠáÛ-
+]squid:UselessImportCheck"-Remove this unused import 'okhttp3.Response'.(Ï‚ñ—øÿÿÿÿ8èûŠáÛ-
+msquid:UselessImportCheck"BRemove this unused import 'com.example.demenagemoi.model.Removal'.( ¨‚·8û‹áÛ-
+^squid:UselessImportCheck".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8èûŠáÛ-
+_squid:UselessImportCheck"4Remove this unused import 'android.widget.EditText'.(†Å›Ú8èûŠáÛ-
+qsquid:UselessImportCheck"FRemove this unused import 'com.example.demenagemoi.Helpers.Constants'.(é¡ú8èûŠáÛ-
+[squid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8û‹áÛ-
+csquid:UselessImportCheck"3Remove this unused import 'org.json.JSONException'.(¹Ó·úÿÿÿÿ8û‹áÛ-
+_squid:UselessImportCheck"/Remove this unused import 'org.json.JSONArray'.(¬¸Ê’üÿÿÿÿ8û‹áÛ-
+osquid:UselessImportCheck"DRemove this unused import 'java.util.concurrent.ExecutionException'.(¡£ØÍ8èûŠáÛ-
+\squid:UselessImportCheck"1Remove this unused import 'android.os.AsyncTask'.(À»¥—8èûŠáÛ-
+asquid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ8èûŠáÛ-
+zsquid:UselessImportCheck"JRemove this unused import 'android.support.v7.widget.LinearLayoutManager'.(í™½Úúÿÿÿÿ8û‹áÛ-

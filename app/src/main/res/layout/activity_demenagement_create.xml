@@ -21,10 +21,10 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.77"
+        app:layout_constraintHorizontal_bias="0.885"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.011" />
 
     <Button
         android:id="@+id/ReturnButton"
@@ -46,37 +46,20 @@
         app:layout_constraintVertical_bias="0.011" />
 
     <EditText
-        android:id="@+id/DemenagementName"
+        android:id="@+id/dateRemoval"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="Nom du déménagement"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="155dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Date"
-        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DemenagementName" />
+        app:layout_constraintTop_toBottomOf="@+id/CreerUnDemenagement" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/beginningLoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -88,24 +71,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/dateRemoval" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/descriptionRemoval"
         android:layout_width="213dp"
         android:layout_height="153dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="84dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="Ajouter une description"
+        android:hint="Ajouter une number"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintTop_toBottomOf="@+id/beginningLoc" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/createRemoval"
         android:layout_width="156dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
@@ -117,10 +100,10 @@
         android:textColor="@color/buttonText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionRemoval" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/arrivalLoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -130,10 +113,10 @@
         android:ems="10"
         android:hint="Lieu d'arrivée"
         android:inputType="textPostalAddress"
-        app:layout_constraintBottom_toTopOf="@+id/editText6"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionRemoval"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/beginningLoc"
         app:layout_constraintVertical_bias="0.217" />
 </android.support.constraint.ConstraintLayout>

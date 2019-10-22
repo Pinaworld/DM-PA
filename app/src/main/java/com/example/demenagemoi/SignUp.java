@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.demenagemoi.Helpers.Constants;
-import com.example.demenagemoi.Helpers.Utils;
+import com.example.demenagemoi.helpers.Constants;
+import com.example.demenagemoi.helpers.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +44,7 @@ public class SignUp extends AppCompatActivity {
             content.put(Constants.User.ZIP_CODE, zipCode);
             content.put(Constants.User.CITY, city);
             content.put(Constants.User.EMAIL, email);
-            content.put(Constants.User.PASSWORD, password);
+            content.put(Constants.User.USER_PASS, password);
 
             HashMap<String, Object> params = new HashMap<>();
             JSONObject body = Utils.jsonify(content);
@@ -61,8 +61,12 @@ public class SignUp extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
+                        while (requestManager.get() == null) {
+                            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                        }
+                        Response response = requestManager.get();
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                        int code = requestManager.get().code();
+                        int code = response.code();
 
                         if (code != 201) {
                             Toast.makeText(SignUp.this, "Erreur lors de la création de l'utilisateur", Toast.LENGTH_SHORT).show();
@@ -73,17 +77,15 @@ public class SignUp extends AppCompatActivity {
                             intent.putExtra("password", password);
                             startActivity(intent);
                         }
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
+
+                    } catch (ExecutionException | InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-            }, 500);
+            }, 1500);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
 }

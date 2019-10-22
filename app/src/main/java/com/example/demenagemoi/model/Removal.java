@@ -1,6 +1,6 @@
 package com.example.demenagemoi.model;
 
-import com.example.demenagemoi.Helpers.Constants;
+import com.example.demenagemoi.helpers.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -98,7 +98,7 @@ public class Removal {
 
     public static Collection<Removal> fillList(JSONArray jsonarray) throws JSONException {
         if (jsonarray == null || jsonarray.length() == 0)
-            return null;
+            return new ArrayList<>();
         List<Removal> olist = new ArrayList<>();
         for (int i = 0; i < jsonarray.length(); i++) {
             olist.add(fill(jsonarray.getJSONObject(i)));

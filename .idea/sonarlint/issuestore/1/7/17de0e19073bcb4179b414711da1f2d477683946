@@ -1,0 +1,12 @@
+
+@squid:S1148‚"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+?squid:S1148k"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+_squid:S1192("HDefine a constant instead of duplicating this literal "context" 4 times.(‡Žà³
+?squid:S11485"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+?squid:S1148P"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+`squid:S11920"IDefine a constant instead of duplicating this literal "no-cache" 4 times.(É„’¹
+]squid:S1192)"FDefine a constant instead of duplicating this literal "route" 4 times.(é‹ô†
+hsquid:S1192/"QDefine a constant instead of duplicating this literal "application/json" 6 times.(Û—Éœ
+žsquid:S1186‡"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(æ×´·ýÿÿÿÿ
+esquid:S11920"NDefine a constant instead of duplicating this literal "Cache-Control" 4 times.(É„’¹
+dsquid:S1192/"MDefine a constant instead of duplicating this literal "Content-Type" 4 times.(Û—Éœ

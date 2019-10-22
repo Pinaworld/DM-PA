@@ -3,7 +3,7 @@ package com.example.demenagemoi;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.demenagemoi.Helpers.Config;
+import com.example.demenagemoi.helpers.Config;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,7 +14,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-class RequestManager extends AsyncTask<HashMap<String, Object>, Void, Response> {
+public class RequestManager extends AsyncTask<HashMap<String, Object>, Void, Response> {
+
+    public static final String CONTEXT = "context";
+    public static final String ROUTE = "route";
+    public static final String CONTENT_TYPE = "Content-Type";
+    public static final String CACHE_CONTROL = "Cache-Control";
+    public static final String NO_CACHE = "no-cache";
+    public static final String APPLICATION_JSON = "application/json";
 
     protected Response doInBackground(HashMap<String, Object>... parameterMaps) {
         Response response = null;
@@ -29,8 +36,6 @@ class RequestManager extends AsyncTask<HashMap<String, Object>, Void, Response> 
         } else if ("DELETE".equals(method)) {
             response = doDelete(params);
         }
-
-
         return response;
     }
 
@@ -39,18 +44,15 @@ class RequestManager extends AsyncTask<HashMap<String, Object>, Void, Response> 
         try {
             OkHttpClient client = new OkHttpClient();
 
-            Context context = (Context) params.get("context");
-            String protocol = Config.getConfigValue(context, "protocol");
-            String ipAddress = Config.getConfigValue(context, "ipAddress");
-            String port = Config.getConfigValue(context, "port");
-            String route = (String) params.get("route");
-            String url = protocol + ipAddress + ":" + port + "/" + route;
+            Context context = (Context) params.get(CONTEXT);
+            String route = (String) params.get(ROUTE);
+            String url = Config.getConfigValue(context,"url") + route;
 
             Request request = new Request.Builder()
                     .url(url)
                     .get()
-                    .addHeader("Content-Type", "application/json")
-                    .addHeader("Cache-Control", "no-cache")
+                    .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                    .addHeader(CACHE_CONTROL, NO_CACHE)
                     .build();
 
             response = client.newCall(request).execute();
@@ -65,22 +67,19 @@ class RequestManager extends AsyncTask<HashMap<String, Object>, Void, Response> 
         try {
             OkHttpClient client = new OkHttpClient();
 
-            Context context = (Context) params.get("context");
-            String protocol = Config.getConfigValue(context, "protocol");
-            String ipAddress = Config.getConfigValue(context, "ipAddress");
-            String port = Config.getConfigValue(context, "port");
-            String route = (String) params.get("route");
-            String url = protocol + ipAddress + ":" + port + "/" + route;
+            Context context = (Context) params.get(CONTEXT);
+            String route = (String) params.get(ROUTE);
+            String url = Config.getConfigValue(context,"url") + route;
 
-            MediaType mediaType = MediaType.parse("application/json");
+            MediaType mediaType = MediaType.parse(APPLICATION_JSON);
             String bodyContent = params.get("body").toString();
             RequestBody body = RequestBody.create(mediaType, bodyContent);
 
             Request request = new Request.Builder()
                     .url(url)
                     .post(body)
-                    .addHeader("Content-Type", "application/json")
-                    .addHeader("Cache-Control", "no-cache")
+                    .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                    .addHeader(CACHE_CONTROL, NO_CACHE)
                     .build();
 
             response = client.newCall(request).execute();
@@ -95,22 +94,19 @@ class RequestManager extends AsyncTask<HashMap<String, Object>, Void, Response> 
         try {
             OkHttpClient client = new OkHttpClient();
 
-            Context context = (Context) params.get("context");
-            String protocol = Config.getConfigValue(context, "protocol");
-            String ipAddress = Config.getConfigValue(context, "ipAddress");
-            String port = Config.getConfigValue(context, "port");
-            String route = (String) params.get("route");
-            String url = protocol + ipAddress + ":" + port + "/" + route;
+            Context context = (Context) params.get(CONTEXT);
+            String route = (String) params.get(ROUTE);
+            String url = Config.getConfigValue(context,"url") + route;
 
-            MediaType mediaType = MediaType.parse("application/json");
+            MediaType mediaType = MediaType.parse(APPLICATION_JSON);
             String bodyContent = params.get("body").toString();
             RequestBody body = RequestBody.create(mediaType, bodyContent);
 
             Request request = new Request.Builder()
                     .url(url)
                     .put(body)
-                    .addHeader("Content-Type", "application/json")
-                    .addHeader("Cache-Control", "no-cache")
+                    .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                    .addHeader(CACHE_CONTROL, NO_CACHE)
                     .build();
 
             response = client.newCall(request).execute();
@@ -125,18 +121,15 @@ class RequestManager extends AsyncTask<HashMap<String, Object>, Void, Response> 
         try {
             OkHttpClient client = new OkHttpClient();
 
-            Context context = (Context) params.get("context");
-            String protocol = Config.getConfigValue(context, "protocol");
-            String ipAddress = Config.getConfigValue(context, "ipAddress");
-            String port = Config.getConfigValue(context, "port");
-            String route = (String) params.get("route");
-            String url = protocol + ipAddress + ":" + port + "/" + route;
+            Context context = (Context) params.get(CONTEXT);
+            String route = (String) params.get(ROUTE);
+            String url = Config.getConfigValue(context,"url") + route;
 
             Request request = new Request.Builder()
                     .url(url)
                     .delete()
-                    .addHeader("Content-Type", "application/json")
-                    .addHeader("Cache-Control", "no-cache")
+                    .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                    .addHeader(CACHE_CONTROL, NO_CACHE)
                     .build();
 
             response = client.newCall(request).execute();
@@ -147,6 +140,6 @@ class RequestManager extends AsyncTask<HashMap<String, Object>, Void, Response> 
     }
 
     protected void onPostExecute(Response response) {
-
+        //NOT USED
     }
 }

@@ -7,12 +7,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.demenagemoi.Helpers.Constants.User.CITY;
-import static com.example.demenagemoi.Helpers.Constants.User.EMAIL;
-import static com.example.demenagemoi.Helpers.Constants.User.FIRST_NAME;
-import static com.example.demenagemoi.Helpers.Constants.User.LAST_NAME;
-import static com.example.demenagemoi.Helpers.Constants.User.PASSWORD;
-import static com.example.demenagemoi.Helpers.Constants.User.ZIP_CODE;
+import static com.example.demenagemoi.helpers.Constants.User.CITY;
+import static com.example.demenagemoi.helpers.Constants.User.EMAIL;
+import static com.example.demenagemoi.helpers.Constants.User.FIRST_NAME;
+import static com.example.demenagemoi.helpers.Constants.User.LAST_NAME;
+import static com.example.demenagemoi.helpers.Constants.User.USER_PASS;
+import static com.example.demenagemoi.helpers.Constants.User.ZIP_CODE;
 
 public class User {
 
@@ -93,15 +93,15 @@ public class User {
         if (jsonObject.has(EMAIL)) {
             entity.setEmail(jsonObject.getString(EMAIL));
         }
-        if (jsonObject.has(PASSWORD)) {
-            entity.setPassword(jsonObject.getString(PASSWORD));
+        if (jsonObject.has(USER_PASS)) {
+            entity.setPassword(jsonObject.getString(USER_PASS));
         }
         return entity;
     }
 
     public static List<User> fillList(JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() == 0)
-            return null;
+            return new ArrayList<>();
         List<User> userList = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             userList.add(fill(jsonArray.getJSONObject(i)));
